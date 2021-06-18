@@ -1,0 +1,31 @@
+.movies__container{
+    @extend %page;
+    background-color: $myBlue;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+%movies_item{
+    overflow-x: hidden;
+    height: calc(100vh - 8rem);
+    width: 100vw;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+@media only screen and (min-height: 500px) {
+    %movies_item{
+        max-height: calc(50vh - 4rem);
+    }
+
+    .item{
+        min-width: 49vw;
+    }
+
+
+}

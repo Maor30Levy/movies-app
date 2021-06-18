@@ -1,0 +1,11 @@
+.now-playing{
+    @extend %movies_item;
+    background-color: yellow;
+    
+}
+
+.coming-soon{
+    @extend %movies_item;
+    background-color: rgb(255, 0, 76);
+    
+}
