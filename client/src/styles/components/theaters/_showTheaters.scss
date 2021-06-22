@@ -1,0 +1,117 @@
+.theaters__container{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    width: 100vw;
+    // height: calc(100vh - 2rem);
+}
+
+.theater{
+    display: flex;
+    flex-direction: column;
+    min-height: 40vh;
+}
+
+.theater__movies__container{
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    min-height: 32vh;
+}
+
+.theater__movie{
+    margin-top: 0.75rem;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 22vw;
+    box-shadow:  inset 2px 2px 5px 5px  rgb(218, 215, 215);
+    border-radius: 0.5rem;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    &:hover{
+        margin-top: 0;
+    }
+    h4{
+        margin: 0 1rem;
+        padding: 0.5rem 0;
+        width: 100%;
+    }
+    .poster__container{
+        margin: 0 2rem;
+        max-height:20vh;
+        .poster{
+            margin:0 1rem;
+            width: auto;
+        }
+    }
+    .time-slot{
+        margin: 0 1rem;
+        width: 100%; 
+    }
+}
+
+
+
+
+@media only screen and (max-width: 820px) {
+    
+    .theaters__container{ 
+        height: calc(100vh - 8rem);
+        
+        .h3{
+            margin: 0.5rem 0;
+    }
+}
+    .theater__movie{
+        margin-top: 0;
+        max-width: 33vw;
+        padding: 0.75rem;
+    }
+
+    .theater__movie .poster__container{
+        margin: 0;
+        .poster{
+            margin: 0;
+        }
+    }
+}
+
+@media only screen and (max-height: 460px) {
+    .theater{
+        min-height: 50vh; 
+        h3{
+            margin: 0.5rem;
+        }
+    }
+    
+    .theater__movies__container{
+        height:40vh;
+    }
+    .theater__movie{
+        height:40vh;
+    }
+
+    .theater__movie .poster__container{
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .theater__movies__container{
+        min-height: 30vh;
+    }
+    .theater__movie{
+        height: 30vh;
+        width: 40vw;
+        max-width: 100%;
+        h4{
+            margin: 0 0.5rem;
+        }
+        .time-slot{
+            margin: 0 auto;
+            font-size: small; 
+        }
+    }
+
+}

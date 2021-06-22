@@ -1,0 +1,82 @@
+.modal__container{
+    height: calc(100vh - 2rem);
+    width: 100vw;
+    background-color: rgba(255, 255, 255, 0.658);
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+};
+
+.modal{
+    position: fixed;
+    top: 5rem;
+    width: 600px;
+    height: 600px;
+    background: $myWhite;
+    border: $myDarkBlue 0.5rem solid;
+    border-radius: 1rem;
+
+}
+
+.modal__header{
+  display: flex;
+  background-color: $myDarkBlue;
+  height: 2rem;
+  width: 100%;
+}
+
+.modal__back{
+  color: white !important;
+  cursor: pointer;
+}
+
+.modal__content{
+    padding: 0.5rem;
+    height: 94%;
+    overflow-y: auto;
+}
+
+.close-modal__container{
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+}
+
+.close-modal::before,
+.close-modal::after{
+    content: '';
+    width: 0.75rem;
+    background-color: white;
+    position:absolute;
+    height: 0.075rem;
+    transition: all .25s ease-in-out;
+    margin-top: 0.75rem;
+    right: 0.5rem;   
+
+}
+
+.close-modal::before{
+  transform: rotate(45deg);
+}
+
+.close-modal::after{
+  transform: rotate(-45deg) ;
+}
+
+
+@media only screen and (max-width: 820px) {
+  .modal__container{
+    top:0;
+    left:0;
+    height: 100vh;
+    z-index: 100;
+  }
+  .modal{
+    top: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+  }
+}

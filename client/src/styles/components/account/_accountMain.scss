@@ -1,0 +1,5 @@
+.account__main{
+    @extend %page;
+    flex-direction: column;
+    overflow-y: auto;
+}

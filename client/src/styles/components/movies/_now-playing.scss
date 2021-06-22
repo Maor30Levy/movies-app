@@ -1,11 +1,17 @@
 .now-playing{
     @extend %movies_item;
-    background-color: yellow;
-    
+    background-color: rgb(224, 224, 224);
+    // overflow-x: scroll;
 }
 
 .coming-soon{
     @extend %movies_item;
     background-color: rgb(255, 0, 76);
     
+}
+
+@media only screen and (min-width: 820px) {
+    .now-playing h3{
+        font-size:xx-large;
+    }
 }

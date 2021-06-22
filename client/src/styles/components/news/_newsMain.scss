@@ -1,0 +1,6 @@
+.news__main{
+    @extend %page;
+    // align-items: flex-start;
+    flex-direction: column;
+    overflow-y: auto;
+}

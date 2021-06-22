@@ -4,6 +4,15 @@
     align-items: flex-start;
     flex-direction: column;
     overflow-y: auto;
+    
+}
+
+.container__box{
+    display: flex;
+}
+
+.scroll-button{
+    display: none;
 }
 
 %movies_item{
@@ -18,14 +27,76 @@
 
 
 
-@media only screen and (min-height: 500px) {
+@media only screen and (min-height: 500px) and (max-width: 820px){
     %movies_item{
         max-height: calc(50vh - 4rem);
     }
+}
 
-    .item{
-        min-width: 49vw;
+@media only screen and (min-width: 820.01px) {
+    %movies_item{
+        height: calc(100vh - 4rem);
     }
 
+    .scroll-button{
+        display: flex;
+        height: 100%;
+        width: 3rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
 
+        %triangle__base{
+            background: $myDarkBlue;
+            height: 0.125rem;
+            width: 2rem;
+            position: absolute;
+        }
+        .scroll-button__right{
+            @extend  %triangle__base;
+            transform: rotate(-90deg) ;
+            width: 3.5rem;
+        }
+
+        .scroll-button__right::before{
+            @extend  %triangle__base;
+            left: 1.6rem;
+            top: 0.5rem;
+            transform: rotate(-30deg) ;
+            content: "";
+        }
+
+        .scroll-button__right::after{
+            @extend  %triangle__base;
+            top: 0.5rem;
+            left: -0.1rem;
+            transform: rotate(30deg) ;
+            content: "";
+        }
+        
+
+        .scroll-button__left{
+            @extend  %triangle__base;
+            transform: rotate(-90deg) ;
+            width: 3.5rem;
+        }
+
+        .scroll-button__left::before{
+            @extend  %triangle__base;
+            left: 1.6rem;
+            top: -0.5rem;
+            transform: rotate(210deg) ;
+            content: "";
+        }
+
+        .scroll-button__left::after{
+            @extend  %triangle__base;
+            top: -0.5rem;
+            left: -0.1rem;
+            transform: rotate(330deg) ;
+            content: "";
+        }
+
+
+    }
 }

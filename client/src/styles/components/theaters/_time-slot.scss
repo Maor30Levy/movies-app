@@ -1,0 +1,24 @@
+.time-slot{
+    display: flex;
+    align-items: center;
+}
+
+.time-slot__container{
+    display: flex;
+    padding: 0.5rem;
+    
+}
+
+.time-slot__day{
+    width:6rem;
+}
+
+.time-slot__hour{
+    margin: 0 0.25rem;
+    padding: 0.5rem;
+    border: 0.125rem solid $myDarkBlue;
+    cursor: pointer;
+    &:hover{
+        background: $myBlue;
+    }
+}

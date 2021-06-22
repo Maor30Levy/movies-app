@@ -1,6 +1,7 @@
 export const initialUserData = {
     loggedIn: false,
     activeUser: '',
+    location: '',
     token: '',
     avatar: null,
     activeHeader: false,
@@ -36,6 +37,13 @@ const UserReducer = (userData, action) => {
                 token: '',
                 avatar: null
             };
+
+        case "SET_LOCATION":
+            return {
+                ...userData,
+                location: action.location
+            };
+
         default:
             return { ...userData };
 

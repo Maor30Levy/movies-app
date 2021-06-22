@@ -20,7 +20,8 @@
   flex-direction: column;
   cursor: pointer;
   align-items: center;
-  div{
+  text-align: center;
+  div{padding: 0.25rem;
     font-size: smaller;
   }
 }
@@ -30,3 +31,9 @@
   height: 2.5rem;
 }
 
+
+@media only screen and (min-width: 820.01px) {
+  .footer__container{
+    display: none;
+  }
+}

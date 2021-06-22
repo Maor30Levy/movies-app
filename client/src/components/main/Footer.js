@@ -24,19 +24,19 @@ export default function Footer() {
         <div className="footer__container">
             <div className="footer">
                 <div className="icon__container" id="0" onClick={onClickIcon}>
-                    <img className="footer__icon" src={"./icons/‏‏movies_icon" + activeButtons[0] + ".png"} alt="movies_icon" />
+                    <img className="footer__icon" src={"./icons/footer/‏‏movies_icon" + activeButtons[0] + ".png"} alt="movies_icon" />
                     <div>Movies</div>
                 </div>
                 <div className="icon__container" id="1" onClick={onClickIcon}>
-                    <img className="footer__icon" src={"./icons/‏‏theaters_icon" + activeButtons[1] + ".png"} alt="theaters_icon" />
+                    <img className="footer__icon" src={"./icons/footer/‏‏theaters_icon" + activeButtons[1] + ".png"} alt="theaters_icon" />
                     <div>Theaters</div>
                 </div>
                 <div className="icon__container" id="2" onClick={onClickIcon}>
-                    <img className="footer__icon" src={"./icons/news_icon" + activeButtons[2] + ".png"} alt="news_icon" />
+                    <img className="footer__icon" src={"./icons/footer/news_icon" + activeButtons[2] + ".png"} alt="news_icon" />
                     <div>News</div>
                 </div>
                 <div className="icon__container" id="3" onClick={onClickIcon}>
-                    <img className="footer__icon" src={"./icons/account_icon" + activeButtons[3] + ".png"} alt="account_icon" />
+                    <img className="footer__icon" src={"./icons/footer/account_icon" + activeButtons[3] + ".png"} alt="account_icon" />
                     <div>Account</div>
                 </div>
             </div>

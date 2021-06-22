@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'
+import { NavLink, useHistory } from 'react-router-dom';
 import ItemSearch from './ItemSearch';
+import { UserContext } from '../../contexts/UserContext';
+import { setWindowAction } from '../../actions/UserActions';
 
 export default function Header() {
+    const { userDataDispatch } = useContext(UserContext);
     const [isQuery, setIsQuery] = useState(false);
     const [onInput, setOnInput] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        userDataDispatch(setWindowAction(window.innerWidth));
+    }, [userDataDispatch]);
 
     const onInputQuery = (event) => {
         const input = event.target.value;
@@ -25,17 +32,20 @@ export default function Header() {
         setOnInput(true);
     };
 
-    const onClickCancelQuery = () => {
+    const onClickCancelQuery = (event) => {
         setOnInput(false);
+        setIsQuery(false);
+        const queryInput = event.target.previousSibling.children[0].children[1];
+        queryInput.value = "";
     }
 
     return (
         <div className="header__container">
             <div className="header">
-                <img className="header__logo" src="./icons/logo.png" alt="logo" onClick={onClickLogo} />
+                <img className="header__logo" src="./icons/header/logo.png" alt="logo" onClick={onClickLogo} />
                 <div className="header__search_bar">
                     <div className="bar">
-                        <img className="find-icon" src="./icons/find_icon.png" alt="find" />
+                        <img className="find-icon" src="./icons/header/find_icon.png" alt="find" />
                         <input placeholder="Movies and Shows"
                             onInput={onInputQuery}
                             onFocus={onFocusInput}
@@ -44,6 +54,13 @@ export default function Header() {
                     </div>
                 </div>
                 {onInput && <div className="cancel-item-serach" onClick={onClickCancelQuery}>Cancel</div>}
+                {!onInput && <div className="nav__bar">
+                    <div className="nav__link"><NavLink to="/movies" className="a_nav" activeClassName="a_nav__active">Movies</NavLink></div>
+                    <div className="nav__link"><NavLink to="/theaters" className="a_nav" activeClassName="a_nav__active">Theaters</NavLink></div>
+                    <div className="nav__link"><NavLink to="/news" className="a_nav" activeClassName="a_nav__active">News</NavLink></div>
+                    <NavLink className="account_logo" to="/account">                    <img src="./icons/header/‏‏account_icon__header.png" alt="account_logo" />
+                    </NavLink>
+                </div>}
             </div>
             {onInput && <ItemSearch />}
         </div>

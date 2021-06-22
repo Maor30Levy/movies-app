@@ -1,3 +1,7 @@
+// html {
+//     scroll-behavior: smooth;
+//   }
+
 * {
     box-sizing: border-box;
     font-size: 1rem;
@@ -13,7 +17,7 @@ input{
       }
 }
 
-%a-nav{
+a{
     text-decoration: none;
     color: white;
     margin: 0 1rem;
@@ -22,19 +26,41 @@ input{
 %page{
     width:100%;
     min-height: calc(100vh - 4rem);
+    background-color: rgb(224, 224, 224);
     margin-top: 4rem;
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
-    overflow-y: auto;
+
 
     div{
-        color: $myBlue;
+        color:$myDarkBlue;
     }
 }
+
+button {
+    border: none;
+    color: white;
+    margin: 1rem;
+    border-radius: 0.5rem;
+    width:10rem;
+    background: $myDarkBlue;
+    padding: 0.5rem;
+
+    &:hover {
+      background: $myBlue;
+      cursor: pointer;
+      border: $myDarkBlue 0.125rem solid;
+      color: $myDarkBlue;
+    }
+  }
+
+
 .none{
     display: none;
 }
+
+
 
 
 

@@ -9,11 +9,55 @@
 .header{
   padding: 0.25rem;
   display: flex;
-  justify-content: stretch;
   flex-direction: row;
   align-items: center;
+  // justify-content: space-between;
   background: $myDarkBlue;
   z-index: 100;  
+}
+
+.nav__bar{
+  right: -10vw;
+  position: relative;
+  display: flex;
+  color: gold;
+  align-items: center;
+  justify-self: flex-end;
+  padding:0 1rem;
+  img{
+    height: 2rem;
+    width: 1.5rem;
+    cursor: pointer;
+  
+  }
+}
+
+.nav__link{
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+justify-content: center;
+}
+.account_logo{
+}
+.a_nav{
+  color: gold;
+  min-width:4.5rem;
+}
+
+.a_nav__active{
+margin-top: 0.5rem;
+font-weight: 550;
+}
+
+.a_nav__active::after{
+  display: block;
+  margin-top: 0.5rem;
+  height: 0.125rem;
+  background-color: gold;
+  content: "";
+  align-self: center;
 }
 
 .header__logo{
@@ -86,10 +130,20 @@ width: 1.5rem;
   padding: 0.5rem;
 }
 
-@media only screen and (max-width: 360px) {
+@media only screen and (max-width: 820px) {
+  .header{
+    justify-content: flex-start;
+  }
+  
+  .nav__bar{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 460px) {
   .bar{
     input{
-      font-size:75%
+      font-size:73%
     }
   }
   .cancel-item-serach{

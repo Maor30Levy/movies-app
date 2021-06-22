@@ -16,3 +16,8 @@ export const setWindowAction = (windowWidth) => ({
     type: "WINDOW",
     windowWidth
 });
+
+export const setLocationAction = (location) => ({
+    type: "SET_LOCATION",
+    location
+});
