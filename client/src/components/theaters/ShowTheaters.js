@@ -27,9 +27,7 @@ export default function ShowTheaters({ theaters, location }) {
                     movies={theater.movies}
                 />)
             )}
-            {modalData.isModal && <Modal
-                children={modalData.children}
-            />}
+            {modalData.isModal && <Modal />}
         </div>
     )
 }

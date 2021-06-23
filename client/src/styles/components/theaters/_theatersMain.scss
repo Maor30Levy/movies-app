@@ -21,6 +21,7 @@
 }
 
 .pick-location{
+    margin-top: 1rem;
     display: flex;
     width:70vw;
     justify-content: space-evenly;
@@ -39,7 +40,7 @@
         min-height: calc(100vh - 8rem);
     }
     .pick-location{
-        margin-top: 1rem;
+        
         width:100%;
     }
 }

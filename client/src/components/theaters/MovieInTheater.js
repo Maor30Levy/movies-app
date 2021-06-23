@@ -19,10 +19,13 @@ export default function MovieInTheater({ name, slots, id, setModal }) {
     };
 
     const onClickMovie = () => {
-        const children = <ShowMovieDetails
-            name={name}
-            slots={slots}
-        />;
+        const children = {
+            elementName: 'ShowMovieDetails',
+            props: {
+                name,
+                slots
+            }
+        }
         modalDataDispatch(goForwardAction(children));
     }
     return (

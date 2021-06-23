@@ -52,17 +52,19 @@
     cursor: pointer;
     margin-top: 0.25rem;
     border-radius: 0.25rem;
-    &:hover{
-        background-color: rgba(121, 121, 19, 0.548);
-    }
+    
 }
 
 .red{
     background-color: red;
+    cursor:not-allowed;
 }
 
 .green{
     background: rgb(22, 192, 22);
+    &:hover{
+        background-color: rgba(121, 121, 19, 0.548);
+    }
 }
 
 @media only screen and (max-width: 820px) {

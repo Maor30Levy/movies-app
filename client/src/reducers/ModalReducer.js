@@ -1,8 +1,11 @@
+import React from 'react';
+
 export const initialModalData = {
     isModal: false,
     children: null,
     back: []
 };
+
 
 const ModalReducer = (modalData, action) => {
     switch (action.type) {
@@ -15,7 +18,7 @@ const ModalReducer = (modalData, action) => {
             let children;
             if (!!modalData.children) {
                 children = {
-                    element: modalData.children.type.name,
+                    elementName: modalData.children.elementName,
                     props: modalData.children.props
                 };
                 result = result.concat(!!modalData.back ? modalData.back : [], children);
@@ -29,18 +32,11 @@ const ModalReducer = (modalData, action) => {
         case "BACK":
             let back = modalData.back;
             const cell = back.pop();
-            let e, p;
-            if (cell) {
-                e = cell.element
-                p = cell.props
-            }
-            const element = <e props={p} />;
             return {
                 ...modalData,
-                children: element,
+                children: cell,
                 back
             };
-
         default:
             return { ...modalData };
 

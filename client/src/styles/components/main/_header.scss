@@ -17,7 +17,7 @@
 }
 
 .nav__bar{
-  right: -10vw;
+  right: -8vw;
   position: relative;
   display: flex;
   color: gold;
@@ -39,8 +39,7 @@ align-items: center;
 text-align: center;
 justify-content: center;
 }
-.account_logo{
-}
+
 .a_nav{
   color: gold;
   min-width:4.5rem;
@@ -128,6 +127,12 @@ width: 1.5rem;
   color: gold;
   cursor: pointer;
   padding: 0.5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .nav__bar{
+    right: 2vw;
+  }
 }
 
 @media only screen and (max-width: 820px) {

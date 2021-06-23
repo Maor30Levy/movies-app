@@ -11,7 +11,7 @@ export default function TimeSlot({ slot }) {
     const day = (Object.keys(slot))[0];
     const onClickShowHours = (event) => {
         const seats = slot[day][event.target.id].seats;
-        modalDataDispatch(goForwardAction(<Seats seats={seats} />));
+        modalDataDispatch(goForwardAction({ elementName: 'Seats', props: { seats: seats } }));
     };
 
 

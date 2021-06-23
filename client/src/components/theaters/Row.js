@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { goForwardAction } from '../../actions/ModalActions';
+import { ModalContext } from '../../contexts/ModalContext';
 
 export default function Row({ seats, row }) {
-
+    const { modalDataDispatch } = useContext(ModalContext);
     const onClickSeat = (event) => {
         const seat = event.target.id;
-        console.log(`Row: ${row}, Seat: ${seat}`);
+        modalDataDispatch(goForwardAction({ elementName: 'Reservation', props: { row, seat } }));
     }
 
     return (

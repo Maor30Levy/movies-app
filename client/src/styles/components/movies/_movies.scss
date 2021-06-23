@@ -4,6 +4,7 @@
     align-items: flex-start;
     flex-direction: column;
     overflow-y: auto;
+    width:100vw;
     
 }
 
@@ -17,21 +18,27 @@
 
 %movies_item{
     overflow-x: hidden;
-    height: calc(100vh - 8rem);
+    height: 100%;
     width: 100vw;
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
+    overflow-y: visible;
     
 }
 
-
-
-@media only screen and (min-height: 500px) and (max-width: 820px){
+@media only screen and (max-width: 820px) {
     %movies_item{
-        max-height: calc(50vh - 4rem);
+
+        padding: 0.25rem 0.5rem;
     }
 }
+
+// @media only screen and (min-height: 500px) and (max-width: 820px){
+//     %movies_item{
+//         max-height: calc(50vh - 4rem);
+//     }
+// }
 
 @media only screen and (min-width: 820.01px) {
     %movies_item{
