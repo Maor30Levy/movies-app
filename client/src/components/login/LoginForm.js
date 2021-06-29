@@ -55,7 +55,7 @@ const LoginForm = (props) => {
         props.setIsLoginMode(false);
     };
     return (
-        <div>
+        <div className="login-form">
             <h3>Login</h3>
             {
                 errorMessage !== '' && <div className="error-message">{errorMessage}</div>
