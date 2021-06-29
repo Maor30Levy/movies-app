@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import ShowMovieDetails from './ShowMovieDetails';
 import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 

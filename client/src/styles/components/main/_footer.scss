@@ -16,19 +16,44 @@
 }
 
 .icon__container{
-  display: flex;
+  
+}
+
+
+.icon{
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+
+.icon__active{
+  @extend .icon;
+}
+
+
+  .nav{
+    color: unset;
+    display: flex;
   flex-direction: column;
   cursor: pointer;
   align-items: center;
   text-align: center;
-  div{padding: 0.25rem;
-    font-size: smaller;
+  padding: 0.25rem;
+    *{font-size: smaller;}
+    .icon__active{
+    display: none;
   }
 }
 
-.footer__icon{
-  width: 2.5rem;
-  height: 2.5rem;
+
+.nav_active{
+  .icon{
+    display: none;
+    margin: unset;
+  }
+  .icon__active{
+    display: block;
+  }
 }
 
 

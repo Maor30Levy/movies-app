@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const initialModalData = {
     isModal: false,
     children: null,

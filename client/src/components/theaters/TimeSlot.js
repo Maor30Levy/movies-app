@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { ModalContext } from '../../contexts/ModalContext';
 import { goForwardAction } from '../../actions/ModalActions';
-import Seats from './Seats';
 const week = ["Monday", "Tuesday", "Wednesday", "Thursday",
     "Friday", "Saturday", "Sunday",];
 
