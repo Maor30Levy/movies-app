@@ -37,7 +37,7 @@ export default function Ratings({ criticsRatings, audienceRatings }) {
                     <div className="movie-ratings__legend">{Math.round(audienceRatings * 100)}%</div>
                 </div>
             </div>
-            {(userData.loggedIn && !userData.isAdmin) &&
+            {//(userData.loggedIn && !userData.isAdmin) &&
                 <div className="movie-ratings__buttons">
                     <button onClick={onClickAddComment} className="add-comment-button__text">Add Comment</button>
                     <button onClick={onClickAddComment} className="add-comment-button__plus">+</button>

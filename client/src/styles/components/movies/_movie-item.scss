@@ -59,6 +59,7 @@
     button{
         margin: 0;
         padding: 0.125rem;
+        width:100%;
     }
 }
 
@@ -109,10 +110,7 @@
     
     .item{
         min-width: 22vw;
-        .poster{
-
-            margin-top: 0px;
-        }
+        
     }
 
     .movie-ratings__container{
