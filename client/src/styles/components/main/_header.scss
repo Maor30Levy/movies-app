@@ -69,6 +69,7 @@ font-weight: 550;
 .header__search_bar{
   padding: 0.5rem;
 }
+
 .bar{
   display: flex;
   width:50vw;
@@ -127,6 +128,24 @@ width: 1.5rem;
   color: gold;
   cursor: pointer;
   padding: 0.5rem;
+}
+
+.logout{
+  padding: 0.5rem;
+  position: fixed;
+  top:4rem;
+  right: 0;
+  height: 2rem;
+  width: 4.5rem;
+  background: $myBlue;
+  color: $myDarkBlue;
+  border-radius: 0.5rem 0 0 0.5rem;
+  cursor: pointer;
+  &:hover{
+    background: $myDarkBlue;
+  color: $myBlue;
+  }
+
 }
 
 @media only screen and (max-width: 1200px) {

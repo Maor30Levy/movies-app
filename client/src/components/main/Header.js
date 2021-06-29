@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom';
 import ItemSearch from './ItemSearch';
 import { UserContext } from '../../contexts/UserContext';
-import { setWindowAction } from '../../actions/UserActions';
+import { logoutAction, setWindowAction } from '../../actions/UserActions';
 
 export default function Header() {
-    const { userDataDispatch } = useContext(UserContext);
+    const { userData, userDataDispatch } = useContext(UserContext);
     const [isQuery, setIsQuery] = useState(false);
     const [onInput, setOnInput] = useState(false);
     const history = useHistory();
@@ -37,6 +37,11 @@ export default function Header() {
         setIsQuery(false);
         const queryInput = event.target.previousSibling.children[0].children[1];
         queryInput.value = "";
+    };
+
+    const onClickLogout = () => {
+        userDataDispatch(logoutAction());
+        history.push('/movies');
     }
 
     return (
@@ -62,6 +67,7 @@ export default function Header() {
                     </NavLink>
                 </div>}
             </div>
+            {userData.loggedIn && <div className="logout" onClick={onClickLogout}>Logout</div>}
             {onInput && <ItemSearch />}
         </div>
     )

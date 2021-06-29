@@ -7,11 +7,12 @@ import Reservation from '../theaters/Reservation';
 import Default from '../main/Default';
 import AddComment from '../movies/AddComment';
 import Movie from '../movies/Movie';
+import LoginPage from '../login/LoginPage';
 
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
-        Default,
+        Default, LoginPage,
         ShowMovieDetails, Seats, Reservation,
         AddComment, Movie
     };
@@ -31,7 +32,7 @@ export default function Modal() {
         <div className="modal__container">
             <div className="modal">
                 <div className="modal__header">
-                    {modalData.back.length > 0 && <div className="modal__back" onClick={onClickGoBack}>Back</div>}
+                    {modalData.back?.length > 0 && <div className="modal__back" onClick={onClickGoBack}>Back</div>}
                     <div className="close-modal__container" onClick={onClickCloseModal}>
                         <div className="close-modal" ></div>
                     </div>

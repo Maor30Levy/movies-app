@@ -1,0 +1,60 @@
+.admin-account__container{
+    display: flex;
+    align-items: center;
+justify-content: center;
+width: 100vw;
+height: calc(100vh - 4rem);
+flex-wrap: wrap;
+
+.setting{
+    height: 15rem;
+    width: 15rem;
+    box-shadow:  inset 2px 2px 5px 5px  rgb(218, 215, 215);
+border-radius: 1rem;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 1rem;
+transition: all .3s ease-in-out;
+cursor: pointer;
+&:hover{
+    margin-top: 0rem;
+}
+    img{
+        margin-top: 1rem;
+        max-width: 12rem;
+        max-height: 12rem;
+        
+        
+    }
+}
+}
+
+
+
+@media only screen and (max-width: 820px) {
+    .admin-account__container{
+
+    height: calc(100vh - 8rem);
+    .setting {
+        margin-top: 0rem;
+    }
+    }
+}
+
+@media only screen and (max-height: 460px) {
+    .admin-account__container{
+
+    flex-wrap: unset;
+    .setting{
+        height: 9.5rem;
+        width: 9.5rem;
+        img{
+            max-width: 8rem;
+            max-height: 8rem;
+        }
+    }
+
+
+    }
+}
