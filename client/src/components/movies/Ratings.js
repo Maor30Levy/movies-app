@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { goForwardAction } from '../../actions/ModalActions';
+import { ModalContext } from '../../contexts/ModalContext';
+
 
 export default function Ratings({ criticsRatings, audienceRatings }) {
+    const { modalDataDispatch } = useContext(ModalContext);
 
     const getTomatoIcon = (rating) => {
         if (rating >= 0.9) return 'med-tomato';
@@ -8,7 +12,12 @@ export default function Ratings({ criticsRatings, audienceRatings }) {
         else return 'rotten-tomato';
     };
 
+const onClickAddComment = ()=>{
+    modalDataDispatch(goForwardAction(
+        { elementName: 'AddComment', props: { } }
+        ));
 
+}
 
     return (
         <div className="movie-ratings__container">
@@ -24,6 +33,7 @@ export default function Ratings({ criticsRatings, audienceRatings }) {
                 </div>
                 <div className="movie-ratings__legend">{Math.round(audienceRatings * 100)}%</div>
             </div>
+<button onClick={onClickAddComment}>+</button>
 
         </div>
     )

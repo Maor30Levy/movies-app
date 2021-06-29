@@ -1,0 +1,41 @@
+.add-comment__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-comment__rating{
+    padding: 0.5rem 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-comment__comment{
+    width: 100%;
+    textarea{
+        width:100%;
+        height:50vh;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .add-comment__container{
+        button{
+            width: 100%;
+        }
+    }
+    
+    .add-comment__rating{
+
+        flex-direction: column;
+        height: 20vh;
+        
+        
+    }
+    .add-comment__comment{
+    }
+}

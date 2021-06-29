@@ -50,8 +50,13 @@ button {
     &:hover {
       background: $myBlue;
       cursor: pointer;
-      border: $myDarkBlue 0.125rem solid;
       color: $myDarkBlue;
+    }
+
+    &:disabled{
+        background: #ccc;
+        cursor: not-allowed;
+        color: $myDarkBlue;  
     }
   }
 

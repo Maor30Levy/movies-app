@@ -1,0 +1,39 @@
+.star-wrapper {
+    direction: rtl;
+    display: flex;
+  }
+  .active{
+    color: gold !important; 
+  }
+  .star-wrapper div {
+    font-size: 3.5em;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.5s;
+    margin: 4px;
+    cursor: pointer;
+  }
+  .star-wrapper div:hover {
+    color: gold;
+    transform: scale(1.3);
+  }
+  .s1:hover ~ div {
+    color: gold;
+  }
+  .s2:hover ~ div {
+    color: gold;
+  }
+  .s3:hover ~ div {
+    color: gold;
+  }
+  .s4:hover ~ div {
+    color: gold;
+  }
+  .s5:hover ~ div {
+    color: gold;
+  }
+  // .wraper {
+  //   position: absolute;
+  //   bottom: 30px;
+  //   right: 50px;
+  // }

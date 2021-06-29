@@ -5,14 +5,14 @@ import ShowMovieDetails from '../theaters/ShowMovieDetails';
 import Seats from '../theaters/Seats';
 import Reservation from '../theaters/Reservation';
 import Default from '../main/Default';
+import AddComment from '../movies/AddComment';
 
-export default function Modal({ }) {
+export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
         Default,
-        ShowMovieDetails,
-        Seats,
-        Reservation
+        ShowMovieDetails,Seats,Reservation,
+        AddComment
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {
