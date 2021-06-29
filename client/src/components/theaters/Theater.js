@@ -1,7 +1,7 @@
 import React from 'react';
 import { moviesData } from '../../data/movies';
-import { availabilityData } from '../../data/availabilty';
 import MovieInTheater from './MovieInTheater';
+import { getMovieAvailability } from '../../server/utils';
 
 export default function Theater({ id, name, movies }) {
     const getMovieSpecs = (movieID) => {
@@ -9,12 +9,7 @@ export default function Theater({ id, name, movies }) {
     };
 
 
-    const getMovieAvailability = (movieID, theaterID) => {
-        const movie = (availabilityData.filter(({ id }) => (id === movieID)))[0];
-        const availableSlots = movie.timeSlot.filter(({ theater, hasOpenSeats }) => (theater === theaterID && hasOpenSeats))
-        const result = availableSlots.map((slot) => (slot.slots))
-        return result;
-    };
+
 
     const getMovies = (movies) => {
         const result = [];

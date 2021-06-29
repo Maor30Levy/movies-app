@@ -11,15 +11,21 @@
 @import "./components/main/avatar";
 @import "./components/main/item-search";
 @import "./components/main/modal";
+
 @import "./components/movies/movies";
 @import "./components/movies/now-playing";
 @import "./components/movies/movie-item";
 @import "./components/movies/StarRating";
 @import "./components/movies/AddComment";
+@import "./components/movies/movie-item";
+@import "./components/movies/ShowComments";
+
 @import "./components/theaters/theatersMain";
 @import "./components/theaters/showTheaters";
 @import "./components/theaters/seats";
 @import "./components/theaters/time-slot";
 @import "./components/theaters/decription";
+
 @import "./components/account/accountMain";
+
 @import "./components/news/newsMain";

@@ -6,13 +6,14 @@ import Seats from '../theaters/Seats';
 import Reservation from '../theaters/Reservation';
 import Default from '../main/Default';
 import AddComment from '../movies/AddComment';
+import Movie from '../movies/Movie';
 
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
         Default,
-        ShowMovieDetails,Seats,Reservation,
-        AddComment
+        ShowMovieDetails, Seats, Reservation,
+        AddComment, Movie
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

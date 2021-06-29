@@ -14,11 +14,5 @@
 }
 
 .time-slot__hour{
-    margin: 0 0.25rem;
-    padding: 0.5rem;
-    border: 0.125rem solid $myDarkBlue;
-    cursor: pointer;
-    &:hover{
-        background: $myBlue;
-    }
+    @extend .modal__option ;
 }

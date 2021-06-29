@@ -1,0 +1,32 @@
+.comments__container{
+    .comments{
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        height: 6rem;
+        overflow-y: hidden;
+        box-shadow:  inset 0px 0px 2px 2px  rgb(121, 120, 120);
+    }
+    .more{
+        min-height: 50vh;
+        height: 100%;
+    }
+    button{
+        margin: 0;
+        width:100%;
+    }
+}
+
+
+.comment{
+    background: $myWhite;
+    border-radius: 0.5rem;
+    min-height: 2rem;
+    margin: 0.5rem;
+    padding: 0.5rem 0.25rem;
+    text-align: justify;
+    border: 1px solid $myDarkBlue;
+    overflow-y: hidden;
+    
+}

@@ -103,6 +103,15 @@
     // height: 100%;
 }
 
+.theater-options{
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    *{
+        margin: 0.25rem;
+    }
+}
+
 @media only screen and (min-width: 820px) {
     .item__container{
         overflow-x: hidden;

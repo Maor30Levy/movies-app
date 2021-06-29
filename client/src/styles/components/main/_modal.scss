@@ -36,6 +36,17 @@
     padding: 0.5rem;
     height: 94%;
     overflow-y: auto;
+    
+}
+
+.modal__option{
+  margin: 0 0.25rem;
+  padding: 0.5rem;
+  border: 0.125rem solid $myDarkBlue;
+  cursor: pointer;
+  &:hover{
+      background: $myBlue;
+  }
 }
 
 .close-modal__container{
