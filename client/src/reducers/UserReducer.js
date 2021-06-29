@@ -1,5 +1,6 @@
 export const initialUserData = {
     loggedIn: false,
+    isAdmin: false,
     activeUser: '',
     location: '',
     token: '',
@@ -17,7 +18,7 @@ const UserReducer = (userData, action) => {
                 loggedIn: true,
                 activeUser: action.user.user,
                 token: action.user.token,
-                avatar: action.user.avatar
+                isAdmin: action.isAdmin
             };
         case "HEADER":
             return {

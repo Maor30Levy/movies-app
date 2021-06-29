@@ -1,6 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import StarRating from './StarRating';
+import { nanoid } from 'nanoid';
+import { UserContext } from '../../contexts/UserContext';
+
+
 export default function AddComment() {
+    const { userData } = useContext(UserContext);
+
     const [rating, setRating] = useState(null);
     const [comment, setComment] = useState(null);
     const onInputComment = (event) => {
@@ -12,7 +18,9 @@ export default function AddComment() {
         const request = {};
         if (rating) request.rating = rating;
         if (comment) request.comment = {
-            comment
+            user: userData.activeUser,
+            comment,
+            id: nanoid()
         };
         console.log(request)
     }

@@ -22,7 +22,12 @@
     }
 }
 
+
+
 @media only screen and (max-width: 460px) {
+    .add-comment-button__text{
+        display: none;
+    }
     .add-comment__container{
         button{
             width: 100%;
@@ -30,12 +35,23 @@
     }
     
     .add-comment__rating{
-
         flex-direction: column;
-        height: 20vh;
-        
-        
+        height: 20vh;  
     }
-    .add-comment__comment{
+}
+
+@media only screen and (min-width: 460px) {
+  
+    .add-comment-button__plus{
+        display: none;
     }
+
+}
+
+@media only screen and (min-width: 460px){
+    .add-comment-button__text{
+        font-size: x-small;
+    }
+    
+
 }

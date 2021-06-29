@@ -20,7 +20,7 @@ export default function StarRating({ rating, setRating }) {
     }
     return (
         <div className="add-comment__rating">
-            <div class="star-wrapper">
+            <div className="star-wrapper">
                 <div onClick={onClickStar} className={"fas fa-star s5 " + active[4]} id="5" />
                 <div onClick={onClickStar} className={"fas fa-star s4 " + active[3]} id="4" />
                 <div onClick={onClickStar} className={"fas fa-star s3 " + active[2]} id="3" />
