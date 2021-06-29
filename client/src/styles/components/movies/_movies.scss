@@ -29,10 +29,33 @@
 
 @media only screen and (max-width: 820px) {
     %movies_item{
-
         padding: 0.25rem 0.5rem;
     }
 }
+
+@media only screen and (max-width: 820px) {
+    %movies_item{
+        min-height: calc(100vh - 8rem);
+    }
+}
+
+@media only screen and (max-width: 820px) and (min-height: 820px){
+    %movies_item{
+        min-height: calc(50vh - 4rem);
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    %movies_item{
+        min-height: calc(50vh - 4rem);
+    }
+}
+
+
+
+
+
+
 
 // @media only screen and (min-height: 500px) and (max-width: 820px){
 //     %movies_item{

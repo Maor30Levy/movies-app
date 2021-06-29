@@ -6,7 +6,8 @@
     justify-content: space-between;
     width: 100vw;
     // height: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     
 }
 
@@ -101,6 +102,10 @@
     
     .item{
         min-width: 22vw;
+        .poster{
+
+            margin-top: 0px;
+        }
     }
 
     .movie-ratings__container{
