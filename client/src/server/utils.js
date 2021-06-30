@@ -14,6 +14,10 @@ export const getMovies = () => {
     return moviesData;
 };
 
+export const getTheaters = () => {
+    return theaters;
+};
+
 export const getAvailableMovies = () => {
     const result = [];
     getMovies().forEach((movie) => {

@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useContext, useState } from 'react';
+import { ModalContext } from '../../../../contexts/ModalContext';
+import { getMovies } from '../../../../server/utils';
+import UpdateItem from '../UpdateItem';
 
 export default function UpdateMovie() {
-    return (
-        <div>
+    const { modalDataDispatch } = useContext(ModalContext);
 
-        </div>
+
+    const onClickSubmit = () => {
+        console.log('submit');
+    }
+
+    return (
+        <UpdateItem
+            itemType={"Movies"}
+            getItems={getMovies}
+            onSubmit={onClickSubmit}
+        />
     )
 }

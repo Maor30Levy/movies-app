@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Setting from './Setting';
 import Modal from '../../main/Modal';
 import { ModalContext } from '../../../contexts/ModalContext';
+import { getMovies } from '../../../server/utils';
 export default function AdminAccount() {
     const { modalData } = useContext(ModalContext);
 
@@ -18,7 +19,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Update Movie",
-                            elementName: "Default",
+                            elementName: "UpdateMovie",
                             props: {}
                         },
                         {
@@ -40,7 +41,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Update Theater",
-                            elementName: "Default",
+                            elementName: "UpdateTheater",
                             props: {}
                         },
                         {
