@@ -4,8 +4,6 @@ export const initialUserData = {
     activeUser: '',
     location: '',
     token: '',
-    avatar: null,
-    activeHeader: false,
     windowWidth: null,
 
 };
@@ -20,11 +18,6 @@ const UserReducer = (userData, action) => {
                 token: action.user.token,
                 isAdmin: action.isAdmin
             };
-        case "HEADER":
-            return {
-                ...userData,
-                activeHeader: action.activeHeader
-            };
         case "WINDOW":
             return {
                 ...userData,
@@ -36,7 +29,7 @@ const UserReducer = (userData, action) => {
                 loggedIn: false,
                 activeUser: '',
                 token: '',
-                avatar: null
+                isAdmin: false
             };
 
         case "SET_LOCATION":

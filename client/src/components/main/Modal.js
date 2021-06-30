@@ -8,13 +8,16 @@ import Default from '../main/Default';
 import AddComment from '../movies/AddComment';
 import Movie from '../movies/Movie';
 import LoginPage from '../login/LoginPage';
+import Menu from '../account/Menu';
+
 
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
         Default, LoginPage,
         ShowMovieDetails, Seats, Reservation,
-        AddComment, Movie
+        AddComment, Movie,
+        Menu
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

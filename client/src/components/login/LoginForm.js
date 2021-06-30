@@ -11,6 +11,7 @@ const LoginForm = (props) => {
     const { modalDataDispatch } = useContext(ModalContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isEmailInputValid, setIsEmailInputValid] = useState(true);
     const [isPasswordInputValid, setIsPasswordInputValid] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
@@ -43,8 +44,8 @@ const LoginForm = (props) => {
     const onSubmitForm = async (event) => {
         event.preventDefault();
         try {
-            const resUserData = await loginUser({ email, password });
-            userDataDispatch(loginAction(resUserData));
+            const resUserData = await loginUser({ email, password, isAdmin });
+            userDataDispatch(loginAction(resUserData, isAdmin));
             modalDataDispatch(clearModalAction());
         } catch (err) {
             setErrorMessage(err.message);
@@ -53,6 +54,10 @@ const LoginForm = (props) => {
 
     const onClickSubscribe = () => {
         props.setIsLoginMode(false);
+    };
+
+    const onChangeAdminLogin = (event) => {
+        setIsAdmin(event.target.checked);
     };
     return (
         <div className="login-form">
@@ -65,6 +70,7 @@ const LoginForm = (props) => {
                 {!isEmailInputValid && <div className="invalid-message">You must enter your Email.</div>}
                 <input type="password" placeholder="Password" onBlur={onBlurPasswordInput} />
                 {!isPasswordInputValid && <div className="invalid-message">You must enter your password.</div>}
+                <div className="login-admin"><input type="checkbox" onChange={onChangeAdminLogin} />Login as admin</div>
                 <div className="login-form__nav">
                     <button type="submit" disabled={isFormInvalid()}>Submit</button>
                     <div className="login-or-subscribe" onClick={onClickSubscribe}>Subscribe</div>

@@ -2,11 +2,13 @@ import React, { useContext, useState } from 'react';
 import StarRating from './StarRating';
 import { nanoid } from 'nanoid';
 import { UserContext } from '../../contexts/UserContext';
+import { ModalContext } from '../../contexts/ModalContext';
+import { clearModalAction } from '../../actions/ModalActions';
 
 
 export default function AddComment() {
     const { userData } = useContext(UserContext);
-
+    const { modalDataDispatch } = useContext(ModalContext);
     const [rating, setRating] = useState(null);
     const [comment, setComment] = useState(null);
     const onInputComment = (event) => {
@@ -22,7 +24,8 @@ export default function AddComment() {
             comment,
             id: nanoid()
         };
-        console.log(request)
+        console.log(request);
+        modalDataDispatch(clearModalAction());
     }
     return (
         <div className="add-comment__container">

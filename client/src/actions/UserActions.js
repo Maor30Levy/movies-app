@@ -1,6 +1,7 @@
-export const loginAction = (user) => ({
+export const loginAction = (user, isAdmin) => ({
     type: "LOGIN",
-    user
+    user,
+    isAdmin
 });
 
 export const logoutAction = () => ({
