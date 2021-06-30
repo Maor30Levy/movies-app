@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import QueryItems from './QueryItems';
 
-export default function UpdateItem({ itemType, getItems, onSubmit }) {
+export default function UpdateItem({ itemType, getItems, onSubmit, getItemsParams }) {
     const [ableSubmit, setAbleSubmit] = useState(false);
     const [isChecked, setIsChecked] = useState({});
     const onClickClear = () => {
@@ -9,7 +9,7 @@ export default function UpdateItem({ itemType, getItems, onSubmit }) {
         setAbleSubmit(false);
     };
     return (
-        <div>
+        <div className="update-item">
             <QueryItems
                 itemType={itemType}
                 getItems={getItems}
@@ -17,9 +17,12 @@ export default function UpdateItem({ itemType, getItems, onSubmit }) {
                 isChecked={isChecked}
                 setIsChecked={setIsChecked}
                 setAbleSubmit={setAbleSubmit}
+                getItemsParams={getItemsParams}
             />
-            <button onClick={onClickClear}>Clear</button>
-            <button disabled={!ableSubmit} onClick={onSubmit}>Update</button>
+            <div className="update-item__buttons">
+                <button onClick={onClickClear}>Clear</button>
+                <button disabled={!ableSubmit} onClick={onSubmit}>Update</button>
+            </div>
         </div>
     )
 }

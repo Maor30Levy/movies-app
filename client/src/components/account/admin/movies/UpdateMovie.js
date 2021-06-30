@@ -16,6 +16,7 @@ export default function UpdateMovie() {
             itemType={"Movies"}
             getItems={getMovies}
             onSubmit={onClickSubmit}
+            getItemsParams={undefined}
         />
     )
 }

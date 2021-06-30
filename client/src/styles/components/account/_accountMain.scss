@@ -13,3 +13,57 @@
        margin: 0.5rem 0;
    }     
 }
+
+.update-item{
+    display: flex;
+    flex-direction: column;
+    .update-item__buttons{
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+}
+
+.item-query{
+    display: flex;
+    flex-direction: column;
+    .query{
+        padding: 0.5rem;
+        input{
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border:none;
+            &:active{
+                outline: none;
+            }
+        }
+    }
+    .options__container{
+        max-height: 50vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .query__option{
+        width: 100%;
+        padding: 0.5rem;
+    }
+}
+
+
+@media only screen and (max-width: 820px) {
+    .update-item{
+
+        .update-item__buttons{
+
+            flex-direction: column;
+            
+            button{
+                margin: 0.5rem 0;
+                width:100%;
+            }
+        }
+    }
+}

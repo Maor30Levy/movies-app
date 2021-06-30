@@ -11,6 +11,7 @@ import LoginPage from '../login/LoginPage';
 import Menu from '../account/Menu';
 import UpdateMovie from '../account/admin/movies/UpdateMovie';
 import UpdateTheater from '../account/admin/theaters/UpdateTheater';
+import UpdateItem from '../account/admin/UpdateItem';
 
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
@@ -19,7 +20,7 @@ export default function Modal() {
         ShowMovieDetails, Seats, Reservation,
         AddComment, Movie,
         Menu, UpdateMovie,
-        UpdateTheater
+        UpdateTheater, UpdateItem,
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

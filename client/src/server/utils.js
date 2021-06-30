@@ -1,6 +1,7 @@
 import { moviesData } from '../data/movies';
 import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
+import { locations } from '../data/locations';
 
 
 export const getMovieAvailability = (movieID, theaterID) => {
@@ -14,10 +15,13 @@ export const getMovies = () => {
     return moviesData;
 };
 
-export const getTheaters = () => {
-    return theaters;
+export const getTheatersByLocation = (location) => {
+    return theaters.filter((theater) => (location === theater.location));
 };
 
+export const getLocations = () => {
+    return locations;
+}
 export const getAvailableMovies = () => {
     const result = [];
     getMovies().forEach((movie) => {
