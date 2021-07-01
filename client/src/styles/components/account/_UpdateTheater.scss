@@ -1,0 +1,48 @@
+.movies-in-theater{
+    display: flex;
+    flex-direction: column;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+    .listed-movie{
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        .remove{
+            padding: 0.5rem;
+            margin-right:0.25rem;
+            border-radius: 0.5rem;
+            background: $myRed;
+            color: darkred;
+            cursor: pointer;
+            &:hover{
+                background: darkred;
+                color: $myRed;   
+            }
+        }
+    }
+    .add-more-movies{
+        margin: 0;
+        width: 100%;
+    }
+    .more-movies-container{
+        height: 20vh;
+        overflow-y: auto;
+        background: rgba(255, 255, 255, 0.479);
+        border-radius: 0.5rem;
+    }
+
+    .query{
+        padding: 0.5rem;
+        input{
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border:none;
+            &:active{
+                outline: none;
+            }
+        }
+    }
+}
+

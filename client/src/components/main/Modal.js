@@ -12,7 +12,8 @@ import Menu from '../account/Menu';
 import UpdateMovie from '../account/admin/movies/UpdateMovie';
 import UpdateTheater from '../account/admin/theaters/UpdateTheater';
 import UpdateItem from '../account/admin/UpdateItem';
-
+import UpdateTheaterStats from '../account/admin/theaters/UpdateTheaterStats';
+import UpdateAvailableTimeSlots from '../account/admin/theaters/UpdateAvailableTimeSlots';
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
@@ -20,7 +21,7 @@ export default function Modal() {
         ShowMovieDetails, Seats, Reservation,
         AddComment, Movie,
         Menu, UpdateMovie,
-        UpdateTheater, UpdateItem,
+        UpdateTheater, UpdateItem, UpdateTheaterStats, UpdateAvailableTimeSlots
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

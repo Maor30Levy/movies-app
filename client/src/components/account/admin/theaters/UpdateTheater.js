@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import UpdateItem from '../UpdateItem';
 import { getLocations, getTheatersByLocation } from '../../../../server/utils';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { goForwardAction } from '../../../../actions/ModalActions';
@@ -7,7 +6,7 @@ import { goForwardAction } from '../../../../actions/ModalActions';
 export default function UpdateTheater() {
     const { modalDataDispatch } = useContext(ModalContext);
     const onClickSubmit = () => {
-        console.log('submit');
+
     }
     const locations = getLocations();;
     const onClickLocation = (event) => {
@@ -18,7 +17,8 @@ export default function UpdateTheater() {
                 itemType: "Theaters",
                 getItems: getTheatersByLocation,
                 onSubmit: onClickSubmit,
-                getItemsParams: location
+                getItemsParams: location,
+                elementName: "UpdateTheaterStats"
             }
         }))
     }

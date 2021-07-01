@@ -5,6 +5,7 @@ import UpdateItem from '../UpdateItem';
 
 export default function UpdateMovie() {
     const { modalDataDispatch } = useContext(ModalContext);
+    const [isChecked, setIsChecked] = useState({});
 
 
     const onClickSubmit = () => {
@@ -17,6 +18,8 @@ export default function UpdateMovie() {
             getItems={getMovies}
             onSubmit={onClickSubmit}
             getItemsParams={undefined}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
         />
     )
 }

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { goForwardAction } from '../../../actions/ModalActions';
+import { ModalContext } from '../../../contexts/ModalContext';
 import QueryItems from './QueryItems';
 
-export default function UpdateItem({ itemType, getItems, onSubmit, getItemsParams }) {
+export default function UpdateItem({ itemType, getItems, elementName, getItemsParams, }) {
+    const { modalDataDispatch } = useContext(ModalContext);
     const [ableSubmit, setAbleSubmit] = useState(false);
     const [isChecked, setIsChecked] = useState({});
     const onClickClear = () => {
         setIsChecked({});
         setAbleSubmit(false);
     };
+
+    const onClichSubmit = () => {
+        modalDataDispatch(goForwardAction({
+            elementName,
+            props: { theaterID: Object.keys(isChecked)[0] }
+        }))
+    }
+
     return (
         <div className="update-item">
             <QueryItems
@@ -21,7 +32,7 @@ export default function UpdateItem({ itemType, getItems, onSubmit, getItemsParam
             />
             <div className="update-item__buttons">
                 <button onClick={onClickClear}>Clear</button>
-                <button disabled={!ableSubmit} onClick={onSubmit}>Update</button>
+                <button disabled={!ableSubmit} onClick={onClichSubmit}>Update</button>
             </div>
         </div>
     )

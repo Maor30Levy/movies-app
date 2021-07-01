@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function QueryItems({ itemType, getItems, inputType, isChecked, setIsChecked, setAbleSubmit, getItemsParams }) {
+export default function QueryItems({ itemType, getItems, inputType, setAbleSubmit, getItemsParams, isChecked, setIsChecked }) {
     const items = getItems(getItemsParams);
     const [diaplayItems, setDisplayItems] = useState([...items]);
 
@@ -49,7 +49,7 @@ export default function QueryItems({ itemType, getItems, inputType, isChecked, s
             <div className="options__container">{
                 diaplayItems.map((item, i) => (
                     <div key={i} className="query__option">
-                        <input id={item.id} type={inputType} onChange={onChangeChecked} checked={isChecked[i]} /> {item.name}
+                        <input id={item.id} type={inputType} onChange={onChangeChecked} checked={!!isChecked[item.id]} /> {item.name}
                     </div>
                 ))
             }</div>
