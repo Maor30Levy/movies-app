@@ -3,7 +3,7 @@ import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
 
-const getElementFromArray = (array, key, value) => {
+export const getElementFromArray = (array, key, value) => {
     return array.filter((element) => (element[key] === value))[0]
 }
 export const getMovieAvailability = (movieID, theaterID) => {
