@@ -4,6 +4,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import Theater from './Theater';
 import Modal from '../main/Modal';
+import { nanoid } from 'nanoid';
 
 export default function ShowTheaters({ theaters, location }) {
     const { userDataDispatch } = useContext(UserContext);
@@ -21,7 +22,7 @@ export default function ShowTheaters({ theaters, location }) {
             {theaters.map(
                 (theater) =>
                 (<Theater
-                    key={theater.id}
+                    key={nanoid()}
                     id={theater.id}
                     name={theater.name}
                     movies={theater.movies}

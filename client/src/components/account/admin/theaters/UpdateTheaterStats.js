@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
+import { nanoid } from 'nanoid';
 
 export default function UpdateTheaterStats({ theaterID }) {
     const { modalDataDispatch } = useContext(ModalContext);
@@ -80,7 +81,7 @@ export default function UpdateTheaterStats({ theaterID }) {
             <div className="movies-in-theater">
                 {moviesList.map((movieID, i) => {
                     const { name } = getMovieByID(movieID);
-                    return (<div className="listed-movie" key={i} id={i} onClick={onClickRemove}>
+                    return (<div className="listed-movie" key={nanoid()} id={i} onClick={onClickRemove}>
                         <div className="remove">Remove</div>{name}
                     </div>)
                 })}
@@ -92,7 +93,7 @@ export default function UpdateTheaterStats({ theaterID }) {
                         </div>
                         {
                             displyMovies.map((movie, i) => (
-                                <div key={i}>
+                                <div key={nanoid()}>
                                     <input id={movie.id} type="checkBox" checked={moviesList.indexOf(movie.id) >= 0} onChange={onChangeMovieChecked} />{movie.name}
                                 </div>
 

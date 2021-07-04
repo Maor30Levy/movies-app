@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { ModalContext } from '../../contexts/ModalContext';
 import { goForwardAction } from '../../actions/ModalActions';
+import { nanoid } from 'nanoid';
+
 const week = ["Monday", "Tuesday", "Wednesday", "Thursday",
     "Friday", "Saturday", "Sunday",];
 
@@ -21,7 +23,7 @@ export default function TimeSlot({ slot }) {
                 {slot[day].length > 0 && slot[day].map((show, i) => (
                     <div
                         className="time-slot__hour"
-                        key={i}
+                        key={nanoid()}
                         id={i}
                         onClick={onClickShowHours}>{show.startTime}</div>
                 ))}

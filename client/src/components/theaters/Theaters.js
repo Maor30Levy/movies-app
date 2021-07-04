@@ -4,6 +4,8 @@ import { locations } from '../../data/locations';
 import ShowTheaters from './ShowTheaters';
 import { UserContext } from '../../contexts/UserContext';
 import { setLocationAction } from '../../actions/UserActions';
+import { nanoid } from 'nanoid';
+
 const getLocations = () => (locations);
 const getTheaters = (requestedLocation) => {
     return theaters.filter(({ location }) => (location === requestedLocation));
@@ -23,7 +25,7 @@ export default function Theaters() {
                 <h3>Pick a location:</h3>
                 <select>
                     {locations.map((location, i) =>
-                        (<option key={i}>{location}</option>)
+                        (<option key={nanoid()}>{location}</option>)
                     )}
                 </select>
                 <button onClick={onClickLocation}>Go</button>

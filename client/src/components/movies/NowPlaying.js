@@ -4,6 +4,8 @@ import { UserContext } from '../../contexts/UserContext';
 import ScrollRight from '../main/ScrollRight';
 import ScrollLeft from '../main/ScrollLeft';
 import { getAvailableMovies } from '../../server/utils';
+import { nanoid } from 'nanoid';
+
 
 export default function NowPlaying() {
     const { userData } = useContext(UserContext);
@@ -18,7 +20,7 @@ export default function NowPlaying() {
 
                     {displayMovies.length > 0 ? displayMovies.map(({ id, description, name, ratings, comments }, i) => (
 
-                        <MovieItem key={i}
+                        <MovieItem key={nanoid()}
                             id={id}
                             description={description}
                             name={name}

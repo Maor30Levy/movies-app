@@ -3,6 +3,7 @@ import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 import { getMovieAvailabilityAll } from '../../server/utils';
 import ShowComments from './ShowComments';
+import { nanoid } from 'nanoid';
 
 export default function Movie({ description, comments, id }) {
     const { modalDataDispatch } = useContext(ModalContext);
@@ -22,7 +23,7 @@ export default function Movie({ description, comments, id }) {
             </div>
             <div className="theater-options">
                 {allSlots.map(({ theater, location }, i) => (
-                    <div key={i}>
+                    <div key={nanoid()}>
                         <div className="modal__option" onClick={onClickTheater} id={i}>
                             {`${theater}, ${location}`}
                         </div>

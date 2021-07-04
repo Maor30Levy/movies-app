@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { nanoid } from 'nanoid';
 
 export default function ShowComments({ comments }) {
     const [showMore, setShowMore] = useState(false);
@@ -12,7 +13,7 @@ export default function ShowComments({ comments }) {
             <h3>Comments</h3>
             <div className={moreClass}>
                 {comments.map((comment, i) => (
-                    <div key={i} className="comment">{comment.comment}</div>
+                    <div key={nanoid()} className="comment">{comment.comment}</div>
                 ))}
             </div>
             <div>

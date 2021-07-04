@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 
 export default function QueryItems({ itemType, getItems, inputType, setAbleSubmit, getItemsParams, isChecked, setIsChecked }) {
     const items = getItems(getItemsParams);
@@ -48,7 +49,7 @@ export default function QueryItems({ itemType, getItems, inputType, setAbleSubmi
             </div>
             <div className="options__container">{
                 diaplayItems.map((item, i) => (
-                    <div key={i} className="query__option">
+                    <div key={nanoid()} className="query__option">
                         <input id={item.id} type={inputType} onChange={onChangeChecked} checked={!!isChecked[item.id]} /> {item.name}
                     </div>
                 ))

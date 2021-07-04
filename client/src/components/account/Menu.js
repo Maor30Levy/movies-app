@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
+import { nanoid } from 'nanoid';
 
 export default function Menu({ sections }) {
     const { modalDataDispatch } = useContext(ModalContext);
@@ -18,7 +19,7 @@ export default function Menu({ sections }) {
     return (
         <div className="menu__container">
             {sections.length > 0 && sections.map(({ title }, i) => (
-                <button key={i} onClick={onClickOption} id={i}>{title}</button>
+                <button key={nanoid()} onClick={onClickOption} id={i}>{title}</button>
             ))}
         </div>
     )

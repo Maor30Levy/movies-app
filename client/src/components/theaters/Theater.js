@@ -2,6 +2,7 @@ import React from 'react';
 import { moviesData } from '../../data/movies';
 import MovieInTheater from './MovieInTheater';
 import { getMovieAvailability } from '../../server/utils';
+import { nanoid } from 'nanoid';
 
 export default function Theater({ id, name, movies }) {
     const getMovieSpecs = (movieID) => {
@@ -31,7 +32,7 @@ export default function Theater({ id, name, movies }) {
                 {moviesToDisplay.length > 0 && moviesToDisplay.map(
                     (movie, i) =>
                     (<MovieInTheater
-                        key={i}
+                        key={nanoid()}
                         name={movie.name}
                         slots={movie.slots}
                         id={id}

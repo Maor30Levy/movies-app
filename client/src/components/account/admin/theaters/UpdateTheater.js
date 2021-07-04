@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { getLocations, getTheatersByLocation } from '../../../../server/utils';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { goForwardAction } from '../../../../actions/ModalActions';
+import { nanoid } from 'nanoid';
 
 export default function UpdateTheater() {
     const { modalDataDispatch } = useContext(ModalContext);
@@ -28,7 +29,7 @@ export default function UpdateTheater() {
             <h3>Pick a location:</h3>
             <div>
                 {locations.length > 0 && locations.map((location, i) => (
-                    <div key={i} className="modal__option" onClick={onClickLocation}>{location}</div>
+                    <div key={nanoid()} className="modal__option" onClick={onClickLocation}>{location}</div>
                 ))}
             </div>
         </div>

@@ -1,13 +1,15 @@
 import React from 'react'
 import { getAllTheaterTimeSlots } from '../../../../server/utils'
 import UpdateTimeSlot from './UpdateTimeSlot';
+import { nanoid } from 'nanoid';
+
+
 export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails, theaterID }) {
     const timeSlots = getAllTheaterTimeSlots(theaterID, oldMoviesList);
-    console.log(timeSlots)
     return (
         <div>
             {timeSlots.length > 0 && timeSlots.map((timeSlot, i) => (
-                <UpdateTimeSlot key={i} movieTimeSlots={timeSlot} />
+                <UpdateTimeSlot key={nanoid()} movieTimeSlots={timeSlot} />
             ))}
         </div>
     )
