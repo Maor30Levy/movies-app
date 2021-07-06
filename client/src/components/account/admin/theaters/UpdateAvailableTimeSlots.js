@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getAllTheaterTimeSlots } from '../../../../server/utils'
 import UpdateTimeSlot from './UpdateTimeSlot';
 import { nanoid } from 'nanoid';
 import SlotHoursContextProvider from '../../../../contexts/SlotHoursContext'
+import { ModalContext } from '../../../../contexts/ModalContext';
+import { clearModalAction } from '../../../../actions/ModalActions';
 
 export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails, theaterID }) {
+    const { modalDataDispatch } = useContext(ModalContext);
+
     const timeSlots = getAllTheaterTimeSlots(theaterID, theaterDetails.movies);
     const [newTimeSlots, setNewTimeSlots] = useState([...timeSlots]);
     const [isAllMoviesUpdated, setisAllMoviesUpdated] = useState(false);
@@ -22,6 +26,7 @@ export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails
     }, [newTimeSlots])
     const onClickUpdate = () => {
         console.log(newTimeSlots)
+        modalDataDispatch(clearModalAction());
     }
 
     return (
