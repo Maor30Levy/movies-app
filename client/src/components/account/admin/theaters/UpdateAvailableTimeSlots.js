@@ -9,7 +9,7 @@ export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails
     return (
         <div>
             {timeSlots.length > 0 && timeSlots.map((timeSlot, i) => (
-                <UpdateTimeSlot key={nanoid()} movieTimeSlots={timeSlot} />
+                <UpdateTimeSlot key={nanoid()} movieTimeSlots={timeSlot} seats={theaterDetails.seats} />
             ))}
         </div>
     )
