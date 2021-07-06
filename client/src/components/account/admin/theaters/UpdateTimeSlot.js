@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { getMovieByID } from '../../../../server/utils'
 import { nanoid } from 'nanoid';
 import TimeSlot from '../../../theaters/TimeSlot';
 import AddHour from './AddHour';
-export default function UpdateTimeSlot({ movieTimeSlots, seats }) {
+import { SlotHoursContext } from '../../../../contexts/SlotHoursContext';
+import { setHoursAction } from '../../../../actions/SlotHoursActions';
+
+export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, index }) {
+    const { hoursData, hoursDataDispatch } = useContext(SlotHoursContext)
     const { name } = getMovieByID(movieTimeSlots.movieID);
     const week = ["Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday", "Sunday",];
@@ -14,14 +18,16 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats }) {
         return result;
     }
 
-    const slots = [movieTimeSlots.slots.slots];
+    const slots = [movieTimeSlots.slots?.slots];
     const [displaySlots, setDisplaySlots] = useState([...slots]);
     const [existingDays, setExistingDays] = useState(getDays(displaySlots));
     const [addDay, setAddDay] = useState(false);
-    const [hours, setHours] = useState([]);
+    const [day, setDay] = useState('Pick A Day');
+
     const onSelectDay = (event) => {
-        const day = week.indexOf(event.target.value) + 1;
+        setDay(event.target.value);
     };
+
     const onClickaddDay = () => {
         setAddDay(existingDays.length < 7)
     };
@@ -35,10 +41,14 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats }) {
             const mm = hour.children[1].value;
             slot.startTime = `${hh}:${mm}`;
             slot.endTime = `${hh + 3}:${mm}`;
-            slots.seats = createSeats(seats);
+            slot.seats = createSeats(seats);
             result.push(slot);
         }
-        result.sort((a, b) => (a.startTime < b.startTime))
+        result.sort((a, b) => {
+            const h1 = a.startTime.split(':');
+            const h2 = b.startTime.split(':');
+            return (parseInt(h1[0]) > parseInt(h2[0]))
+        })
         return result;
     };
 
@@ -59,44 +69,55 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats }) {
         newSlots.push(slot);
         newSlots.sort((a, b) => (Object.keys(a)[0] > Object.keys(b)[0]));
         setDisplaySlots([newSlots]);
-        setHours([]);
+        hoursDataDispatch(setHoursAction([]));
         setExistingDays(getDays([newSlots]));
         setAddDay(false);
+        console.log(newSlots)
+        setTimeSlots(index, newSlots)
     };
 
 
-    const removeHour = (event) => {
-        if (event.target.children[0].children[0])
-            console.log(hours);
+    const removeHour = (event, h) => {
+        if (!!event.target.children[0]?.children[0]) {
+            const e = (h.filter((hour) => (hour.props.id === event.target.id)))[0];
+            const index = h.indexOf(e);
+            const newHours = [].concat(h.slice(0, index), h.slice(index + 1) || []);
+            console.log(newHours)
+            hoursDataDispatch(setHoursAction(newHours));
+        }
+
         event.stopPropagation();
     };
 
     const onClickAddHour = () => {
-        setHours([].concat(hours, <AddHour key={nanoid()} removeHour={removeHour} />))
+        hoursDataDispatch(setHoursAction([].concat(hoursData.hours, <AddHour key={nanoid()} removeHour={removeHour} id={nanoid()} />)));
     };
 
     return (
-        <div>
+        <div className="update-time-slot__container">
             <h3>{name}</h3>
-            {
-                displaySlots.length > 0 && displaySlots[0].map((slot) => {
+            <div className="update-time-slot__timeslots">
+                {
+                    displaySlots.length > 0 && displaySlots[0].map((slot) => {
 
-                    return (
-                        <TimeSlot key={nanoid()} slot={slot} />
-                    )
-                })
-            }
+                        return (
+                            <TimeSlot key={nanoid()} slot={slot} onClickFunc={() => { }} />
+                        )
+                    })
+                }
+            </div>
             {!!addDay && <div className="add-day__container">
-                <select onChange={onSelectDay}>
+                <select onChange={onSelectDay} value={day}>
+                    <option>{'Pick A Day'}</option>
                     {week.filter((week, i) => (!existingDays.includes(i))).map((day) => (<option key={nanoid()}>{day}</option>))}
                 </select>
                 <div className="add-time-slot">
-                    {hours.length > 0 && hours.map((hour) => (hour))}
+                    {hoursData.hours.length > 0 && hoursData.hours.map((hour) => (hour))}
                 </div>
 
                 <div className="add-time-slot__add-hour" onClick={onClickAddHour}>+</div>
 
-                <button className="add-day__submit" onClick={onClickSubmitDay} disabled={!hours.length > 0}>Add</button>
+                <button className="add-day__submit" onClick={onClickSubmitDay} disabled={!hoursData.hours.length > 0 || day === 'Pick A Day'}>Add</button>
             </div>}
             <button className="add-day__button" onClick={onClickaddDay} disabled={addDay || existingDays.length > 6}>Add Day</button>
         </div>

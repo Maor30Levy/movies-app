@@ -46,6 +46,23 @@
     }
 }
 
+.update-available-timeslots{
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.update-time-slot__container{
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 0.125rem $myDarkBlue solid;padding: 0.25rem;
+    margin: 0.5rem 0;
+    .update-time-slot__timeslots{
+        overflow-x: auto;
+    }
+}
+
 .day-slot{
     width:100%;
  display: flex;
@@ -60,14 +77,17 @@
     .add-time-slot{
         display: flex;
         overflow-x: auto;
-
         
             .add-time-slot__hour{
-                margin: 0 0.5rem;
+                margin: 0 0.25rem;
                 padding: 0.125rem;
                 border-radius: 0.25rem;
                 border: 0.0125rem $myDarkBlue solid;
                 display: flex;
+                 &:hover{
+                     background: $myRed;
+                     cursor: pointer;
+                 }
                 select{
                     min-width:3rem;
                     margin: 0 0.125rem;
@@ -82,9 +102,20 @@
 button.add-day__button{
     margin: 0.5rem 0;
     width:100%;
+    background: $myBlue;
+    color:unset;
+    &:hover{
+       background: $myDarkBlue;
+    color:white; 
+    
+    }
+    &:disabled{
+        background: #ccc;
+        color:unset;
+    }
 }
 button.add-day__submit{
     padding: 0.5rem;
-    margin:0 0.5rem;
+    margin:0;
     width: 4rem;
 }

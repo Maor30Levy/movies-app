@@ -1,19 +1,15 @@
-import React, { useContext } from 'react'
-import { ModalContext } from '../../contexts/ModalContext';
-import { goForwardAction } from '../../actions/ModalActions';
+import React, { useContext } from 'react';
 import { nanoid } from 'nanoid';
 
 const week = ["Monday", "Tuesday", "Wednesday", "Thursday",
     "Friday", "Saturday", "Sunday",];
 
-export default function TimeSlot({ slot }) {
-    const { modalDataDispatch } = useContext(ModalContext);
-
+export default function TimeSlot({ slot, onClickFunc }) {
     const day = (Object.keys(slot))[0];
-    const onClickShowHours = (event) => {
-        const seats = slot[day][event.target.id].seats;
-        modalDataDispatch(goForwardAction({ elementName: 'Seats', props: { seats: seats } }));
-    };
+    const onClickTime = (event) => {
+        onClickFunc(event, slot);
+    }
+
 
 
     return (
@@ -25,7 +21,7 @@ export default function TimeSlot({ slot }) {
                         className="time-slot__hour"
                         key={nanoid()}
                         id={i}
-                        onClick={onClickShowHours}>{show.startTime}</div>
+                        onClick={onClickTime}>{show.startTime}</div>
                 ))}
             </div>
         </div>

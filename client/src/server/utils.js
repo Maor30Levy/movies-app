@@ -4,7 +4,12 @@ import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
 
 export const getElementFromArray = (array, key, value) => {
-    return array.filter((element) => (element[key] === value))[0]
+    try {
+        return array.filter((element) => (element[key] === value))[0];
+    } catch (err) {
+        return
+    }
+
 }
 export const getMovieAvailability = (movieID, theaterID) => {
     const movie = (availabilityData.filter(({ id }) => (id === movieID)))[0];
@@ -24,8 +29,8 @@ export const getTheatersByLocation = (location) => {
 export const getAllTheaterTimeSlots = (theaterID, movies) => {
     const result = [];
     movies.forEach((movie) => {
-        const { timeSlot } = getElementFromArray(availabilityData, "id", movie)
-        result.push({ movieID: movie, slots: getElementFromArray(timeSlot, "theater", theaterID) })
+        const arrResult = getElementFromArray(availabilityData, "id", movie) || { timeSlot: {} };
+        result.push({ movieID: movie, slots: getElementFromArray(arrResult.timeSlot, "theater", theaterID) || { theater: theaterID, slots: [] } })
     })
     return result;
 }
