@@ -15,7 +15,7 @@ export default function UpdateItem({ itemType, getItems, elementName, getItemsPa
     const onClichSubmit = () => {
         modalDataDispatch(goForwardAction({
             elementName,
-            props: { theaterID: Object.keys(isChecked)[0] }
+            props: { id: Object.keys(isChecked)[0] }
         }))
     }
 

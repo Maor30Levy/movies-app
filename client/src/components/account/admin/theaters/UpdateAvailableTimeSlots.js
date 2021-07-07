@@ -6,10 +6,10 @@ import SlotHoursContextProvider from '../../../../contexts/SlotHoursContext'
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { clearModalAction } from '../../../../actions/ModalActions';
 
-export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails, theaterID }) {
+export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails, id }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
-    const timeSlots = getAllTheaterTimeSlots(theaterID, theaterDetails.movies);
+    const timeSlots = getAllTheaterTimeSlots(id, theaterDetails.movies);
     const [newTimeSlots, setNewTimeSlots] = useState([...timeSlots]);
     const [isAllMoviesUpdated, setisAllMoviesUpdated] = useState(false);
     const setNewSlots = (index, timeSlots) => {

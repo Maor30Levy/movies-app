@@ -7,8 +7,9 @@ import Movies from '../components/movies/Movies';
 import News from '../components/news/News';
 import Theaters from '../components/theaters/Theaters';
 import ModalContextProvider from '../contexts/ModalContext';
-
 import UserContextProvider from '../contexts/UserContext'
+import Article from '../components/news/Article';
+import ArticleRoute from './ArticleRoute';
 export default function AppRouter() {
 
     return (
@@ -22,9 +23,9 @@ export default function AppRouter() {
                         </Route>
                         <Route path="/movies" component={Movies} />
                         <Route path="/account" component={Account} />
+                        <ArticleRoute path="/news/article" component={Article} />
                         <Route path="/news" component={News} />
                         <Route path="/theaters" component={Theaters} />
-
                         <Route path="*" component={Movies} />
                     </Switch>
                     <Footer />

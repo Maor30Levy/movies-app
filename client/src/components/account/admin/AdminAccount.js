@@ -66,17 +66,17 @@ export default function AdminAccount() {
                     [
                         {
                             title: "Add New Article",
-                            elementName: "Default",
+                            elementName: "AddArticle",
                             props: {}
                         },
                         {
                             title: "Update Article",
-                            elementName: "Default",
+                            elementName: "UpdateArticle",
                             props: {}
                         },
                         {
                             title: "Delete Article",
-                            elementName: "Default",
+                            elementName: "DeleteArticle",
                             props: {}
                         },
                     ]} />

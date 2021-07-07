@@ -21,6 +21,10 @@ import DeleteLocation from '../account/admin/theaters/DeleteLocation';
 import ConfirmDelete from '../account/admin/ConfirmDelete';
 import DeleteTheater from '../account/admin/theaters/DeleteTheater';
 import DeleteTheaters from '../account/admin/theaters/DeleteTheaters';
+import AddArticle from '../account/admin/news/AddArticle';
+import UpdateArticle from '../account/admin/news/UpdateArticle';
+import UpdateArticleStats from '../account/admin/news/UpdateArticleStats';
+import DeleteArticle from '../account/admin/news/DeleteArticle';
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
@@ -30,7 +34,12 @@ export default function Modal() {
         Menu, UpdateMovie,
         ConfirmDelete, UpdateItem,
         UpdateTheater, UpdateTheaterStats, UpdateAvailableTimeSlots, AddLoction,
-        AddTheater, AddNewTheaterStats, DeleteLocation, DeleteTheater, DeleteTheaters
+        AddTheater, AddNewTheaterStats, DeleteLocation, DeleteTheater, DeleteTheaters,
+
+
+        AddArticle, UpdateArticle, UpdateArticleStats, DeleteArticle,
+
+
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

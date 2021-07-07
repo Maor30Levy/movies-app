@@ -1,0 +1,11 @@
+.article__main{
+    @extend %page;
+    flex-direction: column;
+    *{
+       padding: 0.5rem;
+
+    }
+    p{
+        text-align: justify;
+    }
+}

@@ -2,6 +2,27 @@ import { moviesData } from '../data/movies';
 import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
+import { news } from '../data/news';
+
+export const addArticle = (article) => {
+    console.log(article);
+};
+
+export const updateArticle = (article) => {
+    console.log(article);
+};
+
+export const deleteArticles = (articles) => {
+    console.log(articles);
+};
+
+export const getNews = () => {
+    return news;
+};
+
+export const getArticleByid = (articleID) => {
+    return getNews().filter(({ id }) => (id === articleID))[0];
+};
 
 export const getElementFromArray = (array, key, value) => {
     try {
@@ -10,7 +31,9 @@ export const getElementFromArray = (array, key, value) => {
         return
     }
 
-}
+};
+
+
 export const getMovieAvailability = (movieID, theaterID) => {
     const movie = (availabilityData.filter(({ id }) => (id === movieID)))[0];
     const availableSlots = movie.timeSlot.filter(({ theater, hasOpenSeats }) => (theater === theaterID && hasOpenSeats))

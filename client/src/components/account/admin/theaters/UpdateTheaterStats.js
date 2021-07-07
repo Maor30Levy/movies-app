@@ -4,10 +4,10 @@ import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';
 
-export default function UpdateTheaterStats({ theaterID }) {
+export default function UpdateTheaterStats({ id }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
-    const { name, movies, seats } = getTheaterByID(theaterID);
+    const { name, movies, seats } = getTheaterByID(id);
     const [nameValue, setNameValue] = useState(name);
     const [seatsValue, setSeatsValue] = useState(seats);
     const [moviesList, setMoviesList] = useState(movies);
@@ -70,7 +70,7 @@ export default function UpdateTheaterStats({ theaterID }) {
             props: {
                 oldMoviesList: movies,
                 theaterDetails,
-                theaterID
+                id
             }
         }))
     }
