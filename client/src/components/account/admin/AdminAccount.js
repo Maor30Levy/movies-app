@@ -46,7 +46,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Delete Theater",
-                            elementName: "Default",
+                            elementName: "DeleteTheater",
                             props: {}
                         },
                         {
@@ -56,7 +56,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Delete Location",
-                            elementName: "Default",
+                            elementName: "DeleteLocation",
                             props: {}
                         },
                     ]} />

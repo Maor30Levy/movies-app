@@ -91,3 +91,13 @@ export const checkForExistingLocation = (location) => {
 export const addNewLocation = (location) => {
     console.log(location);
 }
+
+export const deleteLocation = (location) => {
+    console.log(location);
+    const locationTheaters = getTheatersByLocation(location).map(({ id }) => (id)) || [];
+    console.log(locationTheaters);
+}
+
+export const deleteTheaters = (theaters) => {
+    console.log(theaters);
+}

@@ -1,0 +1,8 @@
+.delete-button{
+    background: $myRed;
+    color: darkred;
+    &:hover{
+        background: darkred;
+    color: $myRed;
+    }
+}

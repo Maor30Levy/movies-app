@@ -17,13 +17,16 @@
 .update-item{
     display: flex;
     flex-direction: column;
-    .update-item__buttons{
+    
+}
+
+.update-item__buttons{
+    justify-content: center;
         padding: 0.5rem;
         display: flex;
         flex-direction: row;
         width: 100%;
     }
-}
 
 .item-query{
     display: flex;
