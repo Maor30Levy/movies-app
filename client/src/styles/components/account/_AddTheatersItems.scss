@@ -1,0 +1,16 @@
+.pick-location__container{
+    .modal__option{
+        margin: 0.25rem 0;
+    }
+}
+
+.add-new-theater__container{
+    display: flex;
+    flex-direction: column;
+}
+
+.add-new-theater-form{
+    border: 0.125rem $myDarkBlue solid;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}

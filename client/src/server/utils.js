@@ -36,8 +36,12 @@ export const getAllTheaterTimeSlots = (theaterID, movies) => {
 }
 
 export const getTheaterByID = (theaterID) => {
-    return theaters.filter(({ id }) => (theaterID === id))[0];
-
+    try {
+        const { name, movies, seats } = theaters.filter(({ id }) => (theaterID === id))[0];
+        return { name, movies, seats }
+    } catch (err) {
+        return { name: "", movies: [], seats: 0 }
+    }
 };
 
 export const getMovieByID = (movieID) => {
@@ -61,9 +65,29 @@ export const getAvailableMovies = () => {
 };
 
 
+export const checkForExistingTheater = (theaterName, theaterLocation) => {
+    return theaters.filter(({ name, location }) => (
+        name === theaterName && location === theaterLocation
+    )).length > 0
+};
+
 export const getMovieAvailabilityAll = (movieID) => {
     const result = [];
     const availableTheaters = theaters.filter(({ movies }) => (movies.includes(movieID)));
     for (let theater of availableTheaters) result.push({ theater: theater.name, location: theater.location, slots: getMovieAvailability(movieID, theater.id) });
     return result;
+};
+
+export const addNewTheater = (theater) => {
+    console.log(theater);
+}
+
+export const checkForExistingLocation = (location) => {
+    return locations.filter((l) => (
+        l === location
+    )).length > 0
+};
+
+export const addNewLocation = (location) => {
+    console.log(location);
 }

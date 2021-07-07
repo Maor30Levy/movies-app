@@ -59,6 +59,7 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, in
     };
 
     const onClickSubmitDay = (event) => {
+        console.log(displaySlots)
         const day = event.target.parentElement.firstChild.value;
         const keyDay = week.indexOf(day) + 1;
         const hoursContainerElement = event.target.parentElement.children[1];
@@ -72,7 +73,7 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, in
         hoursDataDispatch(setHoursAction([]));
         setExistingDays(getDays([newSlots]));
         setAddDay(false);
-        console.log(newSlots)
+        console.log([newSlots])
         setTimeSlots(index, newSlots)
     };
 

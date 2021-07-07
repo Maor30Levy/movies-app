@@ -4,7 +4,7 @@ import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';
 
-export default function UpdateTheaterStats({ theaterID }) {
+export default function AdjustTheaterDetails({ theaterID, onClickSubmitFunc, submitText }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
     const { name, movies, seats } = getTheaterByID(theaterID);
@@ -59,20 +59,14 @@ export default function UpdateTheaterStats({ theaterID }) {
         setAddMoreMovies(!addMoreMovies);
     };
 
-    const onClickUpdate = () => {
+    const onClickSubmit = () => {
         const theaterDetails = {
             name: nameValue,
             seats: parseInt(seatsValue),
             movies: moviesList
         };
-        modalDataDispatch(goForwardAction({
-            elementName: "UpdateAvailableTimeSlots",
-            props: {
-                oldMoviesList: movies,
-                theaterDetails,
-                theaterID
-            }
-        }))
+        onClickSubmitFunc(theaterDetails, theaterID, movies)
+
     }
 
     return (
@@ -104,7 +98,7 @@ export default function UpdateTheaterStats({ theaterID }) {
                 </div>
             </div>
             <div>
-                <button onClick={onClickUpdate} disabled={moviesList.length === 0}>Update Available Time Slots</button>
+                <button onClick={onClickSubmit} disabled={moviesList.length === 0 || nameValue === "" || !seatsValue > 0}>{submitText}</button>
             </div>
         </div>
     )

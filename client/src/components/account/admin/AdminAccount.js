@@ -36,7 +36,7 @@ export default function AdminAccount() {
                     [
                         {
                             title: "Add New Theater",
-                            elementName: "Default",
+                            elementName: "AddTheater",
                             props: {}
                         },
                         {
@@ -51,7 +51,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Add New Location",
-                            elementName: "Default",
+                            elementName: "AddLoction",
                             props: {}
                         },
                         {

@@ -15,6 +15,7 @@ export default function UpdateAvailableTimeSlots({ oldMoviesList, theaterDetails
     const setNewSlots = (index, timeSlots) => {
         const newSlots = [...newTimeSlots];
         newSlots[index].slots.slots = timeSlots;
+        newSlots[index].hasOpenSeats = true;
         setNewTimeSlots(newSlots);
     };
     useEffect(() => {
