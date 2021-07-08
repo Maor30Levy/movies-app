@@ -25,21 +25,31 @@ import AddArticle from '../account/admin/news/AddArticle';
 import UpdateArticle from '../account/admin/news/UpdateArticle';
 import UpdateArticleStats from '../account/admin/news/UpdateArticleStats';
 import DeleteArticle from '../account/admin/news/DeleteArticle';
+import AddMovie from '../account/admin/movies/AddMovie';
+import DeleteMovies from '../account/admin/movies/DeleteMovies';
+import AddMovieTimeSlots from '../account/admin/movies/AddMovieTimeSlots';
+import ChangePassword from '../account/admin/account/ChangePassword';
+import AddAccount from '../account/admin/account/AddAccount';
+import DeleteAccount from '../account/admin/account/DeleteAccount';
+import AdjustItems from '../account/admin/AdjustItems';
+import AddTimeSlots from '../account/admin/movies/AddTimeSlots';
+import UpdateMovieStats from '../account/admin/movies/UpdateMovieStats';
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
         Default, LoginPage,
         ShowMovieDetails, Seats, Reservation,
         AddComment, Movie,
-        Menu, UpdateMovie,
-        ConfirmDelete, UpdateItem,
+        Menu, UpdateMovie, AddMovie, DeleteMovies, AddMovieTimeSlots, AddTimeSlots,
+        UpdateMovieStats,
+        ConfirmDelete, UpdateItem, AdjustItems,
         UpdateTheater, UpdateTheaterStats, UpdateAvailableTimeSlots, AddLoction,
         AddTheater, AddNewTheaterStats, DeleteLocation, DeleteTheater, DeleteTheaters,
 
 
         AddArticle, UpdateArticle, UpdateArticleStats, DeleteArticle,
 
-
+        ChangePassword, AddAccount, DeleteAccount
     };
     const [children, setChildren] = useState({ elementName: 'Default', props: {} });
     useEffect(() => {

@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import React, { useContext } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';

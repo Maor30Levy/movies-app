@@ -1,25 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovies } from '../../../../server/utils';
-import UpdateItem from '../UpdateItem';
+import AdjustItems from '../AdjustItems';
 
 export default function UpdateMovie() {
     const { modalDataDispatch } = useContext(ModalContext);
-    const [isChecked, setIsChecked] = useState({});
+
+    const onClickSubmit = (id) => {
+        modalDataDispatch(goForwardAction({
+            elementName: "UpdateMovieStats",
+            props: { id }
+        }))
+    };
 
 
-    const onClickSubmit = () => {
-        console.log('submit');
-    }
 
     return (
-        <UpdateItem
-            itemType={"Movies"}
-            getItems={getMovies}
-            onSubmit={onClickSubmit}
-            getItemsParams={undefined}
-            isChecked={isChecked}
-            setIsChecked={setIsChecked}
-        />
+        <div>
+            <h3>Pick a movie:</h3>
+            <AdjustItems
+                itemType={"Movies"}
+                getItems={getMovies}
+                getItemsParams={undefined}
+                onSubmitFunc={onClickSubmit}
+                adjustType={"Update"}
+            />
+        </div>
     )
 }

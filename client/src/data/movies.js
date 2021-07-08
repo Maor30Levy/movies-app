@@ -2,7 +2,7 @@ export const moviesData = [
     {
         id: "01",
         name: "Movie 1",
-        ratings: { critics: 0.7, audience: 0.86 },
+        ratings: { critics: 0.7, audience: 0.86, numOfRatings: 40 },
         description: "Description movie1",
         comments: [
             {
@@ -19,7 +19,7 @@ export const moviesData = [
     {
         id: "02",
         name: "Movie 2",
-        ratings: { critics: 0.45, audience: 0.97 },
+        ratings: { critics: 0.45, audience: 0.97, numOfRatings: 78 },
         description: "Description movie2",
         comments: [
             {
@@ -41,7 +41,7 @@ export const moviesData = [
     {
         id: "03",
         name: "Movie 3",
-        ratings: { critics: 0.67, audience: 0.42 },
+        ratings: { critics: 0.67, audience: 0.42, numOfRatings: 80 },
         description: "Description movie3",
         comments: [
             {
@@ -58,7 +58,7 @@ export const moviesData = [
     {
         id: "04",
         name: "Movie 4",
-        ratings: { critics: 0.67, audience: 0.42 },
+        ratings: { critics: 0.67, audience: 0.42, numOfRatings: 2 },
         description: "Description movie4",
         comments: [
             {

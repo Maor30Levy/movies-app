@@ -1,14 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { getMovieByID } from '../../../../server/utils'
 import { nanoid } from 'nanoid';
 import TimeSlot from '../../../theaters/TimeSlot';
-import AddHour from './AddHour';
+import AddHour from '../theaters/AddHour';
 import { SlotHoursContext } from '../../../../contexts/SlotHoursContext';
 import { setHoursAction } from '../../../../actions/SlotHoursActions';
 
-export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, index }) {
+export default function UpdateTimeSlot({ theaterID, name, seats, setTimeSlots, index }) {
     const { hoursData, hoursDataDispatch } = useContext(SlotHoursContext)
-    const { name } = getMovieByID(movieTimeSlots.movieID);
     const week = ["Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday", "Sunday",];
     const getDays = (displaySlots) => {
@@ -18,7 +16,7 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, in
         return result;
     }
 
-    const slots = [movieTimeSlots.slots?.slots];
+    const slots = [[]];
     const [displaySlots, setDisplaySlots] = useState([...slots]);
     const [existingDays, setExistingDays] = useState(getDays(displaySlots));
     const [addDay, setAddDay] = useState(false);
@@ -72,7 +70,7 @@ export default function UpdateTimeSlot({ movieTimeSlots, seats, setTimeSlots, in
         hoursDataDispatch(setHoursAction([]));
         setExistingDays(getDays([newSlots]));
         setAddDay(false);
-        setTimeSlots(index, newSlots)
+        setTimeSlots(index, { theater: theaterID, slots: newSlots, hasOpenSeats: true })
     };
 
 

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';

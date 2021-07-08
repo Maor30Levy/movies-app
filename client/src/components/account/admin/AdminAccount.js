@@ -14,7 +14,7 @@ export default function AdminAccount() {
                     [
                         {
                             title: "Add New Movie",
-                            elementName: "Default",
+                            elementName: "AddMovie",
                             props: {}
                         },
                         {
@@ -24,7 +24,7 @@ export default function AdminAccount() {
                         },
                         {
                             title: "Delete Movie",
-                            elementName: "Default",
+                            elementName: "DeleteMovies",
                             props: {}
                         },
                     ]
@@ -86,17 +86,17 @@ export default function AdminAccount() {
                     [
                         {
                             title: "Change Password",
-                            elementName: "Default",
+                            elementName: "ChangePassword",
                             props: {}
                         },
                         {
                             title: "Add New Admin Account",
-                            elementName: "Default",
+                            elementName: "AddAccount",
                             props: {}
                         },
                         {
                             title: "Delete Admin Account",
-                            elementName: "Default",
+                            elementName: "DeleteAccount",
                             props: {}
                         }
                     ]} />
