@@ -14,12 +14,12 @@ export default function UpdateMovieStats({ id }) {
     }
 
     return (
-        <div>
+        <div className="add-article">
             <h3>{name}</h3>
             Description:<textarea value={newDescription} onInput={onInputText} />
             <button
                 disabled={newDescription === ""}
-                onclick={onClickUpdate}
+                onClick={onClickUpdate}
             >Update</button>
         </div>
     )

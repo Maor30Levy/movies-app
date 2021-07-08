@@ -4,8 +4,6 @@ import { nanoid } from 'nanoid';
 export default function QueryItems({ itemType, getItems, inputType, setAbleSubmit, getItemsParams, isChecked, setIsChecked }) {
     const items = getItems(getItemsParams);
     const [diaplayItems, setDisplayItems] = useState([...items]);
-
-
     const filterItems = (event) => {
         const value = event.target.value;
         if (value === '') {

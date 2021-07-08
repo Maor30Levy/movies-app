@@ -1,10 +1,8 @@
-import React, { useContext, useState } from 'react'
-import { ModalContext } from '../../../../contexts/ModalContext';
+import React, { useState } from 'react'
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';
 
 export default function AdjustTheaterDetails({ theaterID, onClickSubmitFunc, submitText }) {
-    const { modalDataDispatch } = useContext(ModalContext);
 
     const { name, movies, seats } = getTheaterByID(theaterID);
     const [nameValue, setNameValue] = useState(name);

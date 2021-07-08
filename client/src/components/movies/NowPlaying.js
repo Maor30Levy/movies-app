@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import MovieItem from './MovieItem'
 import { UserContext } from '../../contexts/UserContext';
 import ScrollRight from '../main/ScrollRight';
@@ -10,7 +10,7 @@ import { nanoid } from 'nanoid';
 export default function NowPlaying() {
     const { userData } = useContext(UserContext);
     const scrollBy = (userData.windowWidth) * 24 / 100;
-    const [displayMovies, setDisplayMovies] = useState(getAvailableMovies());
+    const displayMovies = getAvailableMovies();
     return (
         <div className="now-playing">
             <h3>Now Playing</h3>

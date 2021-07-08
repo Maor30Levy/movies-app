@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import Setting from './Setting';
 import Modal from '../../main/Modal';
 import { ModalContext } from '../../../contexts/ModalContext';
-import { getMovies } from '../../../server/utils';
 export default function AdminAccount() {
     const { modalData } = useContext(ModalContext);
 

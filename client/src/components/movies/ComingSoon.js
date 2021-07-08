@@ -1,5 +1,4 @@
 import React from 'react'
-import MovieItem from './MovieItem'
 
 export default function ComingSoon() {
     return (

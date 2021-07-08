@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { SlotHoursContext } from '../../../../contexts/SlotHoursContext';
 
 export default function AddHour({ removeHour, id }) {
-    const { hoursData, hoursDataDispatch } = useContext(SlotHoursContext)
+    const { hoursData } = useContext(SlotHoursContext)
     useEffect(() => {
 
     }, [hoursData.hours])
