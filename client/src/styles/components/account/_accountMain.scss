@@ -52,6 +52,11 @@
     .query__option{
         width: 100%;
         padding: 0.5rem;
+        input{
+            width: unset;
+            justify-content: unset;
+            display: unset;
+}
     }
 }
 

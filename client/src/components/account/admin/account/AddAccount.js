@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from 'react';
+import SubscribeForm from '../../../login/SubscribeForm';
+import { subscribeAdmin } from '../../../../server/login';
 export default function AddAccount() {
     return (
-        <div>
-
-        </div>
+        <SubscribeForm
+            subscribeFunc={subscribeAdmin}
+            partOflogin={false}
+        />
     )
 }

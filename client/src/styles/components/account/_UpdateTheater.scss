@@ -31,7 +31,11 @@
         background: rgba(255, 255, 255, 0.479);
         border-radius: 0.5rem;
     }
-
+input{
+    width: unset;
+    justify-content: unset;
+    display: unset;
+}
     .query{
         padding: 0.5rem;
         input{

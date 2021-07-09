@@ -3,6 +3,7 @@ import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
 import { news } from '../data/news';
+import { admins } from '../data/admins';
 
 export const getElementFromArray = (array, key, value) => {
     try {
@@ -13,7 +14,17 @@ export const getElementFromArray = (array, key, value) => {
 
 };
 
+export const getAdminById = (adminID) => {
+    return getAdmins().filter(({ id }) => (id === adminID))[0];
+}
 
+export const getAdmins = () => {
+    return admins;
+}
+
+export const deleteAdmins = (adminsIDsArray) => {
+    console.log(adminsIDsArray);
+}
 
 export const addMovie = (movie) => {
     console.log(movie);

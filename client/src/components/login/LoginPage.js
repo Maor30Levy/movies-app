@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { subscribeUser } from '../../server/login';
 import LoginForm from './LoginForm';
 import SubscribeForm from './SubscribeForm';
 
@@ -13,7 +14,7 @@ const LoginPage = (props) => {
             <div className="login-page__form">
                 {isLoginMode ?
                     <LoginForm setIsLoginMode={setIsLoginMode} errorMessage={errorMessage} /> :
-                    <SubscribeForm setIsLoginMode={setIsLoginMode} />}
+                    <SubscribeForm setIsLoginMode={setIsLoginMode} partOfLogin={true} subscribeFunc={subscribeUser} />}
             </div>
         </div>
     )

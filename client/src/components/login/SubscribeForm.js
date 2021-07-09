@@ -4,7 +4,6 @@ import { clearModalAction } from '../../actions/ModalActions';
 import { loginAction } from '../../actions/UserActions';
 import { ModalContext } from '../../contexts/ModalContext';
 import { UserContext } from '../../contexts/UserContext';
-import { subscribeUser } from '../../server/login';
 
 const SubscribeForm = (props) => {
     const { userDataDispatch } = useContext(UserContext);
@@ -118,8 +117,8 @@ const SubscribeForm = (props) => {
         event.preventDefault();
         try {
             const request = { email, password, username };
-            const userData = await subscribeUser(request);
-            userDataDispatch(loginAction(userData));
+            const userData = await props.subscribeFunc(request);
+            if (props.partOfLogin) userDataDispatch(loginAction(userData));
             modalDataDispatch(clearModalAction());
 
         } catch (err) {
@@ -148,7 +147,7 @@ const SubscribeForm = (props) => {
                 {invalidMessages[3] !== "" && <div className="invalid-message">{invalidMessages[3]}</div>}
                 <div className="login-form__nav">
                     <button type="submit" disabled={isFormInvalid()}>Submit</button>
-                    <div className="login-or-subscribe" onClick={onClickLogin}>Login</div>
+                    {props.partOfLogin && <div className="login-or-subscribe" onClick={onClickLogin}>Login</div>}
                 </div>
             </form>
         </div>

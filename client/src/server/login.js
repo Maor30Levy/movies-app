@@ -5,3 +5,8 @@ export const loginUser = (request) => {
 export const subscribeUser = (request) => {
     return request;
 };
+
+export const subscribeAdmin = (request) => {
+    console.log(request)
+    return request;
+};
