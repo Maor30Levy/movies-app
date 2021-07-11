@@ -14,7 +14,7 @@ const UserReducer = (userData, action) => {
             return {
                 ...userData,
                 loggedIn: true,
-                activeUser: action.user.user,
+                activeUser: action.user.user.name,
                 token: action.user.token,
                 isAdmin: action.isAdmin
             };

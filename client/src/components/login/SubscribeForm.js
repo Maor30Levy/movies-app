@@ -4,6 +4,7 @@ import { clearModalAction } from '../../actions/ModalActions';
 import { loginAction } from '../../actions/UserActions';
 import { ModalContext } from '../../contexts/ModalContext';
 import { UserContext } from '../../contexts/UserContext';
+import { subscribe } from '../../server/login';
 
 const SubscribeForm = (props) => {
     const { userDataDispatch } = useContext(UserContext);
@@ -116,9 +117,9 @@ const SubscribeForm = (props) => {
     const onSubmitform = async (event) => {
         event.preventDefault();
         try {
-            const request = { email, password, username };
-            const userData = await props.subscribeFunc(request);
-            if (props.partOfLogin) userDataDispatch(loginAction(userData));
+            const request = { email, password, name: username, isAdmin: !props.partOfLogin };
+            const userData = await subscribe(request);
+            if (props.partOfLogin) userDataDispatch(loginAction(userData, false));
             modalDataDispatch(clearModalAction());
 
         } catch (err) {

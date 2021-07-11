@@ -18,7 +18,7 @@ export const getAdminById = (adminID) => {
     return getAdmins().filter(({ id }) => (id === adminID))[0];
 }
 
-export const getAdmins = () => {
+export const getAdmins = async (token) => {
     return admins;
 }
 

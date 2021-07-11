@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: web
+          image: maor30levy/movie-app-auth:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: AUTH_PORT
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: MONGO_PORT
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: MONGO_HOST
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: JWT_SECRET

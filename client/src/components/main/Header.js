@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import ItemSearch from './ItemSearch';
 import { UserContext } from '../../contexts/UserContext';
 import { logoutAction, setWindowAction } from '../../actions/UserActions';
+import { logout } from '../../server/login';
 
 export default function Header() {
     const { userData, userDataDispatch } = useContext(UserContext);
@@ -39,10 +40,16 @@ export default function Header() {
         queryInput.value = "";
     };
 
-    const onClickLogout = () => {
-        userDataDispatch(logoutAction());
-        history.push('/movies');
-    }
+    const onClickLogout = async () => {
+        try {
+            await logout(userData.token, userData.isAdmin);
+            userDataDispatch(logoutAction());
+            history.push('/movies');
+        } catch (err) {
+            console.log(err)
+        }
+
+    };
 
     return (
         <div className="header__container">

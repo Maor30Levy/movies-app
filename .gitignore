@@ -1,19 +1,34 @@
-./client/node_modules/
-./client/.gitignore/
+#Client
+/client/node_modules/
+/client/.gitignore/
+
 # dependencies
-./client/.pnp
-./client/.pnp.js
+/client/.pnp
+/client/.pnp.js
 
 # testing
-./client/coverage
+/client/coverage
 
 # misc
-./client/.DS_Store
-./client/.env.local
-./client/.env.development.local
-./client/.env.test.local
-./client/.env.production.local
+/client/.DS_Store
+/client/.env.local
+/client/.env.development.local
+/client/.env.test.local
+/client/.env.production.local
+/client/.env
 
-./client/npm-debug.log*
-./client/yarn-debug.log*
-./client/yarn-error.log*
+/client/npm-debug.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
+
+
+#Server
+/server/node_modules/
+/server/config/
+/server/package-lock.json
+
+
+#Auth
+/auth/node_modules/
+/auth/config/
+/auth/package-lock.json
