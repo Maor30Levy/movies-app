@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
-import { goForwardAction } from '../../../../actions/ModalActions';
+import { setDataAction } from '../../../../actions/DataActions';
+import { clearModalAction, goForwardAction } from '../../../../actions/ModalActions';
+import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
-import { UserContext } from '../../../../contexts/UserContext'
-import { deleteAdmins, getAdminById, getAdmins } from '../../../../server/utils'
+import { UserContext } from '../../../../contexts/UserContext';
+import { deleteAdmins, getAdminsData } from '../../../../server/utils';
 import AdjustItems from '../AdjustItems'
 export default function DeleteAccount() {
     const { userData } = useContext(UserContext);
     const { modalDataDispatch } = useContext(ModalContext);
-    console.log(userData.activeUser)
+    const { contentData, contentDataDispatch } = useContext(DataContext);
+
+    const getAdminById = (adminID) => {
+        return contentData.adminsData.filter(({ id }) => (id === adminID))[0];
+    }
     const onClickDelete = (items) => {
         const adminNames = items.map((item) => {
             const { name } = getAdminById(item);
@@ -23,12 +29,19 @@ export default function DeleteAccount() {
         }))
     };
 
-    const onClickSubmit = (idArray) => {
-        deleteAdmins(idArray)
+    const onClickSubmit = async (idArray) => {
+        await deleteAdmins(idArray, userData.token);
+        const admins = await getAdminsData(userData.token);
+        contentDataDispatch(setDataAction(admins));
+        modalDataDispatch(clearModalAction());
+        modalDataDispatch(goForwardAction({
+            elementName: "ApprovalMessage",
+            props: { message: "Accounts successfully deleted!" }
+        }));
     };
 
     const getAllAdminsExceptCurrent = () => {
-        return getAdmins().filter(({ name }) => (name !== userData.activeUser));
+        return contentData.adminsData.filter(({ name }) => (name !== userData.activeUser));
     }
     return (
         <AdjustItems

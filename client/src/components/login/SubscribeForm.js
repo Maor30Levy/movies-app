@@ -1,14 +1,18 @@
 import React, { useContext, useState } from 'react';
 import validator from 'validator';
-import { clearModalAction } from '../../actions/ModalActions';
+import { setDataAction } from '../../actions/DataActions';
+import { clearModalAction, goForwardAction } from '../../actions/ModalActions';
 import { loginAction } from '../../actions/UserActions';
+import { DataContext } from '../../contexts/DataContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { UserContext } from '../../contexts/UserContext';
 import { subscribe } from '../../server/login';
+import { getAdminsData } from '../../server/utils';
 
 const SubscribeForm = (props) => {
-    const { userDataDispatch } = useContext(UserContext);
+    const { userData, userDataDispatch } = useContext(UserContext);
     const { modalDataDispatch } = useContext(ModalContext);
+    const { contentDataDispatch } = useContext(DataContext);
     const [inputClasses, setInputClasses] = useState(["", "", "", ""]);
     const [invalidMessages, setInvalidMessages] = useState(["", "", "", ""]);
     const [validInputs, setValidInputs] = useState([false, false, false, false]);
@@ -118,9 +122,17 @@ const SubscribeForm = (props) => {
         event.preventDefault();
         try {
             const request = { email, password, name: username, isAdmin: !props.partOfLogin };
-            const userData = await subscribe(request);
-            if (props.partOfLogin) userDataDispatch(loginAction(userData, false));
+            const subscribeData = await subscribe(request);
+            if (props.partOfLogin) userDataDispatch(loginAction(subscribeData, false));
+            else {
+                const admins = await getAdminsData(userData.token)
+                contentDataDispatch(setDataAction(admins));
+            }
             modalDataDispatch(clearModalAction());
+            modalDataDispatch(goForwardAction({
+                elementName: "ApprovalMessage",
+                props: { message: "Account successfully added!" }
+            }));
 
         } catch (err) {
             const errorMessageArray = ["", "", "", ""]

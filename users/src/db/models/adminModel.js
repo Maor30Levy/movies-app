@@ -46,15 +46,20 @@ adminSchema.methods.generateAuthToken = async function () {
     return token
 };
 
+adminSchema.statics.checkPassword = async function (email, password) {
+    const user = await Admin.findOne({ email });
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw new Error('Invalid password');
+    return true;
+};
 
 adminSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
     userObject.id = userObject._id.toString();
 
-    delete userObject._id;
-    delete userObject.password
-    delete userObject.tokens
+    delete userObject.password;
+    delete userObject.tokens;
 
     return userObject
 };

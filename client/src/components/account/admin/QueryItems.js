@@ -46,7 +46,7 @@ export default function QueryItems({ itemType, getItems, inputType, setAbleSubmi
                 <input placeholder={"Find " + itemType} onInput={filterItems} />
             </div>
             <div className="options__container">{
-                diaplayItems.map((item, i) => (
+                diaplayItems.length > 0 && diaplayItems.map((item) => (
                     <div key={nanoid()} className="query__option">
                         <input id={item.id} type={inputType} onChange={onChangeChecked} checked={!!isChecked[item.id]} /> {item.name}
                     </div>

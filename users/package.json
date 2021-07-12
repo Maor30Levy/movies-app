@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "users",
   "version": "1.0.0",
   "description": "README",
   "main": "index.js",
@@ -11,9 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2"
   },
   "devDependencies": {
     "env-cmd": "^10.1.0",

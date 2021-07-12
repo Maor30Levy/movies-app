@@ -9,8 +9,8 @@ export default function ConfirmDelete({ onDeleteFunc, onDeleteFuncData, items })
         modalDataDispatch(clearModalAction());
     };
 
-    const onClickDelete = () => {
-        onDeleteFunc(onDeleteFuncData);
+    const onClickDelete = async () => {
+        await onDeleteFunc(onDeleteFuncData);
         modalDataDispatch(clearModalAction());
     }
 

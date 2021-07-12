@@ -34,10 +34,11 @@ import DeleteAccount from '../account/admin/account/DeleteAccount';
 import AdjustItems from '../account/admin/AdjustItems';
 import AddTimeSlots from '../account/admin/movies/AddTimeSlots';
 import UpdateMovieStats from '../account/admin/movies/UpdateMovieStats';
+import ApprovalMessage from './ApprovalMessage';
 export default function Modal() {
     const { modalData, modalDataDispatch } = useContext(ModalContext);
     const components = {
-        Default, LoginPage,
+        Default, LoginPage, ApprovalMessage,
         ShowMovieDetails, Seats, Reservation,
         AddComment, Movie,
         Menu, UpdateMovie, AddMovie, DeleteMovies, AddMovieTimeSlots, AddTimeSlots,

@@ -13,6 +13,10 @@ router.post('/subscribe', async (req, res) => {
         return res.status(201).send(result.data);
 
     } catch (err) {
+        if (err.response.statusText) {
+            console.log(err.response.statusText);
+            return res.status(err.response.status).send({ message: err.response.statusText });
+        }
         return res.status(500).send();
     }
 });
@@ -25,7 +29,11 @@ router.post('/login', async (req, res) => {
         return res.send(result.data);
 
     } catch (err) {
-        return res.status(400).send();
+        if (err.response.statusText) {
+            console.log(err.response.statusText);
+            return res.status(err.response.status).send({ message: err.response.statusText });
+        }
+        return res.status(500).send();
     }
 });
 
@@ -42,7 +50,11 @@ router.post('/logout', async (req, res) => {
         return res.send();
 
     } catch (err) {
-        return res.status(400).send();
+        if (err.response.statusText) {
+            console.log(err.response.statusText);
+            return res.status(err.response.status).send({ message: err.response.statusText });
+        }
+        return res.status(500).send();
     }
 });
 

@@ -9,9 +9,9 @@ export default function DeleteItems({ itemType, getItems, getItemsParams, onSubm
         setAbleSubmit(false);
     };
 
-    const onClickSubmit = () => {
+    const onClickSubmit = async () => {
         const itemsToSubmit = getItemsToSubmit(adjustType);
-        onSubmitFunc(itemsToSubmit)
+        await onSubmitFunc(itemsToSubmit)
     }
 
     const getItemsToSubmit = (adjustType) => {

@@ -1,14 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { setDataAction } from '../../actions/DataActions';
 import { clearModalAction } from '../../actions/ModalActions';
 import { loginAction } from '../../actions/UserActions';
+import { DataContext } from '../../contexts/DataContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { UserContext } from '../../contexts/UserContext';
 import { loginUser } from '../../server/login';
+import { getAdminsData } from '../../server/utils';
 
 
 const LoginForm = (props) => {
     const { userDataDispatch } = useContext(UserContext);
     const { modalDataDispatch } = useContext(ModalContext);
+    const { contentDataDispatch } = useContext(DataContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
@@ -46,6 +51,10 @@ const LoginForm = (props) => {
         try {
             const resUserData = await loginUser({ email, password, isAdmin });
             userDataDispatch(loginAction(resUserData, isAdmin));
+            if (isAdmin) {
+                const admins = await getAdminsData(resUserData.token)
+                contentDataDispatch(setDataAction(admins));
+            }
             modalDataDispatch(clearModalAction());
         } catch (err) {
             setErrorMessage(err.message);

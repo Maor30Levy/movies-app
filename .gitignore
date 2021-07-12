@@ -32,3 +32,8 @@
 /auth/node_modules/
 /auth/config/
 /auth/package-lock.json
+
+#Users
+/users/node_modules/
+/users/config/
+/users/package-lock.json
