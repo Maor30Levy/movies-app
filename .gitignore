@@ -37,3 +37,8 @@
 /users/node_modules/
 /users/config/
 /users/package-lock.json
+
+#Movies
+/movies/node_modules/
+/movies/config/
+/movies/package-lock.json
