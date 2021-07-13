@@ -14,7 +14,8 @@ export const moviesData = [
                 user: "User3",
                 comment: "Enumerating objects: 31, done Counting objects: 100% (31/31), done. Delta compression using up to 4 threads Compressing objects: 100% (17/17), done.  Writing objects: 100% (17/17), 2.08 KiB | 1.04 MiB/s, done. Total 17 (delta 10), reused 0 (delta 0), pack-reused 0 remote: Resolving deltas: 100% (10/10), completed with 10 local objects.",
                 id: "113"
-            },]
+            },],
+        picture: "./temp/peter-rabbit-2.jpg"
     },
     {
         id: "02",
@@ -36,7 +37,8 @@ export const moviesData = [
                 user: "User3",
                 comment: "Awsome!",
                 id: "113"
-            },]
+            },],
+        picture: null
     },
     {
         id: "03",
@@ -53,7 +55,8 @@ export const moviesData = [
                 user: "User3",
                 comment: "Awsome!",
                 id: "113"
-            },]
+            },],
+        picture: null
     },
     {
         id: "04",
@@ -70,6 +73,7 @@ export const moviesData = [
                 user: "User3",
                 comment: "Awsome!",
                 id: "113"
-            },]
+            },],
+        picture: null
     },
 ];

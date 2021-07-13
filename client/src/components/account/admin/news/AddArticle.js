@@ -23,13 +23,7 @@ export default function AddArticle() {
         const value = event.target.value;
         setInput[index](value);
     };
-    const onClickAddPicture = async (event) => {
-        const pictureInput = event.target.previousSibling;
-        const picture = pictureInput.value;
-        setPicture(picture);
 
-
-    }
     const onClickAdd = async () => {
         try {
             await addArticle(userData.token, { name, subTitle, article, picture });
@@ -52,16 +46,14 @@ export default function AddArticle() {
             Title:<input id="0" onInput={onInputText} />
             Sub-Title:<input id="1" onInput={onInputText} />
             Article:<textarea id="2" onInput={onInputText} />
-            Picture:
-            <div>
-                <input id="3" onInput={onInputText} />
-                {!picture && <button onClick={onClickAddPicture} disabled={!pictureValue}>Add</button>}
-            </div>
-            {!!picture && <AddPicture
+
+            <AddPicture
                 picture={picture}
                 setPicture={setPicture}
+                onInputText={onInputText}
+                pictureValue={pictureValue}
                 setPictureValue={setPictureValue}
-            />}
+            />
             <button
                 disabled={!name || !subTitle || !article}
                 onClick={onClickAdd}

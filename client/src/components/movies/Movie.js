@@ -30,7 +30,12 @@ export default function Movie({ description, comments, id }) {
                     </div>
                 ))}
             </div>
-            <div><ShowComments comments={comments} /></div>
+            <div>
+                {comments.length > 0 ?
+                    <ShowComments comments={comments} /> :
+                    <h3>No comments</h3>
+                }
+            </div>
         </div>
     )
 }

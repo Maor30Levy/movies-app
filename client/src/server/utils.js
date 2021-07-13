@@ -1,4 +1,3 @@
-import { moviesData } from '../data/movies';
 import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
@@ -43,8 +42,9 @@ export const deleteAdmins = async (adminsIDsArray, token) => {
     }
 }
 
-export const addMovie = (movie) => {
-    console.log(movie);
+export const addMovie = async (movie, token) => {
+    const { data } = await axios.post(`${serverURL}/data/add-movie/`, { movie, token });
+    return data.id;
 };
 
 export const updateMovie = (movieID, fieldsToUpdate) => {
@@ -62,27 +62,39 @@ export const getMovieAvailability = (movieID, theaterID) => {
     return result;
 };
 
-export const getMovies = () => {
+export const getMovies = (moviesData) => {
     return moviesData;
 };
 
-export const getMovieByName = (movieName) => {
-    return getMovies().filter(({ name }) => (movieName === name))[0];
+export const getMovieByName = (movieName, moviesData) => {
+    return getMovies(moviesData).filter(({ name }) => (movieName === name))[0];
 };
 
-export const getMovieByID = (movieID) => {
-    return getMovies().filter(({ id }) => (movieID === id))[0];
+export const getMovieByID = (movieID, moviesData) => {
+    return getMovies(moviesData).filter(({ id }) => (movieID === id))[0];
 };
 
 export const getAvailableMovies = (moviesData) => {
     const result = [];
     moviesData.forEach((movie) => {
+        // for (let timeSlot of availabilityData) {
+        //     if (movie.id === timeSlot.id) {
+        result.push(movie);
+        //     break;
+        // }
+        // }
+    });
+    return result;
+};
+
+export const getUnavailableMovies = (moviesData, availabilityData) => {
+    const result = [];
+    moviesData.forEach((movie) => {
+        let found = false;
         for (let timeSlot of availabilityData) {
-            if (movie.id === timeSlot.id) {
-                result.push(movie);
-                break;
-            }
+            if (movie.id === timeSlot.id) found = true;
         }
+        if (!found) result.push(movie);
     });
     return result;
 };
@@ -101,8 +113,13 @@ export const addAvailability = (availability) => {
 
 
 
-export const addNewTheater = (theater) => {
-    console.log(theater);
+export const addNewTheater = async (token, theater) => {
+    try {
+        await axios.post(`${serverURL}/data/add-theater`, { token, theater });
+
+    } catch (err) {
+        throw err
+    }
 };
 
 export const deleteTheaters = (theaters) => {
@@ -145,8 +162,13 @@ export const getLocations = () => {
     return locations;
 };
 
-export const addNewLocation = (location) => {
-    console.log(location);
+export const addNewLocation = async (token, name) => {
+    try {
+        await axios.post(`${serverURL}/data/add-location`, { token, name });
+
+    } catch (err) {
+        throw err
+    }
 };
 
 export const deleteLocation = (location) => {
@@ -155,7 +177,7 @@ export const deleteLocation = (location) => {
     console.log(locationTheaters);
 };
 
-export const checkForExistingLocation = (location) => {
+export const checkForExistingLocation = (location, locations) => {
     return locations.filter((l) => (
         l === location
     )).length > 0
@@ -196,10 +218,11 @@ export const getAllData = async () => {
     const data = {};
     try {
         data.newsData = await getArticles();
-        data.moviesData = moviesData;
+        data.moviesData = await getMoviesData();
         data.availabilityData = availabilityData;
         data.theatersData = theaters;
         data.locationsData = locations;
+        data.isLoaded = true;
         return data;
     } catch (err) {
         console.log(err)
@@ -216,6 +239,17 @@ export const getArticles = async () => {
     }
 
 };
+
+export const getMoviesData = async () => {
+    try {
+        const { data } = await axios.get(`${serverURL}/data/get-movies`);
+        return data;
+    } catch (err) {
+        console.log(err)
+    }
+
+};
+
 
 export const getNews = (news) => {
     return news;

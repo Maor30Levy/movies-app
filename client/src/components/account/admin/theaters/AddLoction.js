@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
+import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
+import { UserContext } from '../../../../contexts/UserContext';
 import { addNewLocation, checkForExistingLocation } from '../../../../server/utils';
 
 export default function AddLoction() {
     const { modalDataDispatch } = useContext(ModalContext);
+    const { contentData } = useContext(DataContext);
+    const { userData } = useContext(UserContext);
 
     const [location, setLocation] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -14,16 +18,20 @@ export default function AddLoction() {
         setLocation(event.target.value)
     };
 
-    const onClickAddLocation = () => {
+    const onClickAddLocation = async () => {
         setErrorMessage("")
-        if (!checkForExistingLocation(location)) {
-            addNewLocation(location);
-            modalDataDispatch(goForwardAction({
-                elementName: "AddNewTheaterStats",
-                props: {
-                    location
-                }
-            }))
+        if (!checkForExistingLocation(location, contentData.locationsData)) {
+            try {
+                await addNewLocation(userData.token, location);
+                modalDataDispatch(goForwardAction({
+                    elementName: "AddNewTheaterStats",
+                    props: {
+                        location
+                    }
+                }))
+            } catch (err) {
+                setErrorMessage(err.response?.data.message || err.message)
+            }
 
         } else setErrorMessage("Location already exists!")
     }

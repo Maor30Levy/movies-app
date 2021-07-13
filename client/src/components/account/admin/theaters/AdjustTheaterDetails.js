@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';
-
+import { DataContext } from '../../../../contexts/DataContext';
 export default function AdjustTheaterDetails({ theaterID, onClickSubmitFunc, submitText }) {
-
+    const { contentData } = useContext(DataContext);
     const { name, movies, seats } = getTheaterByID(theaterID);
     const [nameValue, setNameValue] = useState(name);
     const [seatsValue, setSeatsValue] = useState(seats);
     const [moviesList, setMoviesList] = useState(movies);
     const setValues = [setNameValue, setSeatsValue];
     const [addMoreMovies, setAddMoreMovies] = useState(false);
-    const allMovies = getMovies();
+    const allMovies = getMovies(contentData.moviesData);
     const [displyMovies, setDisplayMovies] = useState([...allMovies])
-
     const filterItems = (event) => {
         const value = event.target.value;
         if (value === '') {
@@ -56,13 +55,16 @@ export default function AdjustTheaterDetails({ theaterID, onClickSubmitFunc, sub
         setAddMoreMovies(!addMoreMovies);
     };
 
-    const onClickSubmit = () => {
+    const onClickSubmit = async () => {
         const theaterDetails = {
             name: nameValue,
             seats: parseInt(seatsValue),
             movies: moviesList
         };
-        onClickSubmitFunc(theaterDetails, theaterID, movies)
+        try {
+            await onClickSubmitFunc(theaterDetails, theaterID, movies)
+        } catch (err) { console.log(err) }
+
 
     }
 
@@ -72,7 +74,7 @@ export default function AdjustTheaterDetails({ theaterID, onClickSubmitFunc, sub
             <div>Seats: <input id="1" value={seatsValue} type="number" onChange={onChangeValue} /></div>
             <div className="movies-in-theater">
                 {moviesList.map((movieID, i) => {
-                    const { name } = getMovieByID(movieID);
+                    const { name } = getMovieByID(movieID, contentData.moviesData);
                     return (<div className="listed-movie" key={nanoid()} id={i} onClick={onClickRemove}>
                         <div className="remove">Remove</div>{name}
                     </div>)

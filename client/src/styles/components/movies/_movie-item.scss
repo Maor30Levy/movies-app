@@ -25,6 +25,7 @@
 .poster__container{
     height:100%;
     max-height:60vh;
+    max-width:25vw;
     display: flex;
 }
 
@@ -96,7 +97,6 @@
     padding: 0.125rem;
     display: flex;
     flex-direction: row;
-    background-color: $myRed;
     overflow: hidden;
     font-size: smaller;
     height: 1.5rem;

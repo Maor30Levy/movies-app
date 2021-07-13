@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 
-export default function ShowMovieDetails({ name, slots }) {
+export default function ShowMovieDetails({ name, slots, description }) {
 
     const { modalDataDispatch } = useContext(ModalContext);
 
@@ -16,7 +16,7 @@ export default function ShowMovieDetails({ name, slots }) {
     return (
         <div>
             <div className="description__container">
-                Description
+                {description}
             </div>
             <div>
                 {slots.length > 0 ?

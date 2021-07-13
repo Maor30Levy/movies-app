@@ -65,6 +65,9 @@ router.patch('/data/update-password', async (req, res) => {
 });
 
 
+
+
+
 router.post('/data/add-article', async (req, res) => {
     try {
         await axios.post(`${moviesURL}/news/add-article`, req.body.article, {
@@ -127,7 +130,6 @@ router.post('/data/delete-articles', async (req, res) => {
     }
 });
 
-
 router.get('/data/get-articles', async (req, res) => {
     try {
         const { data } = await axios.get(`${moviesURL}/news/get-articles`);
@@ -142,5 +144,111 @@ router.get('/data/get-articles', async (req, res) => {
         return res.status(500).send();
     }
 });
+
+
+
+
+
+router.get('/data/get-movies', async (req, res) => {
+    try {
+        const { data } = await axios.get(`${moviesURL}/movies/get-movies`);
+        return res.send(data);
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            const message = err.response.data.message || err.response.statusText;
+            console.log(message);
+            return res.status(err.response.status).send({ message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
+router.post('/data/add-movie', async (req, res) => {
+    try {
+        const { movie } = req.body;
+        const { data } = await axios.post(`${moviesURL}/movies/add-movie`, { movie }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send(data);
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
+router.post('/data/add-movie-timeslot', async (req, res) => {
+    try {
+        const { timeslot } = req.body;
+        const { data } = await axios.post(`${moviesURL}/movies/add-movie-timeslot`, { timeslot }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
+
+
+router.post('/data/add-location', async (req, res) => {
+    try {
+        console.log(req.body);
+        await axios.post(`${moviesURL}/theaters/add-location`, { name: req.body.name }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
+router.post('/data/add-theater', async (req, res) => {
+    try {
+        await axios.post(`${moviesURL}/theaters/add-theater`, { theater: req.body.theater }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
 
 module.exports = router;

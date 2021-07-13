@@ -42,8 +42,8 @@ export default function AddTimeSlots({ id, theaters }) {
             {theaters.length > 0 && theaters.map((theaterId, i) => {
                 const { name, location, seats } = getTheaterByID(theaterId)
                 return (
-                    <SlotHoursContextProvider>
-                        <AddTimeSlot key={nanoid()}
+                    <SlotHoursContextProvider key={nanoid()}>
+                        <AddTimeSlot
                             name={`${name} - ${location}`}
                             seats={seats}
                             index={i}

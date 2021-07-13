@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Account from '../components/account/Account';
 import Footer from '../components/main/Footer';
@@ -11,8 +11,8 @@ import UserContextProvider from '../contexts/UserContext';
 import DataContextProvider from '../contexts/DataContext';
 import Article from '../components/news/Article';
 import ArticleRoute from './ArticleRoute';
+import Home from '../components/main/Home';
 export default function AppRouter() {
-
     return (
         <BrowserRouter>
             <ModalContextProvider>
@@ -23,6 +23,7 @@ export default function AppRouter() {
                             <Route path="/" exact>
                                 <Redirect to="/movies" />
                             </Route>
+                            {/* <Route path="/home" component={Home} /> */}
                             <Route path="/movies" component={Movies} />
                             <Route path="/account" component={Account} />
                             <ArticleRoute path="/news/article" component={Article} />

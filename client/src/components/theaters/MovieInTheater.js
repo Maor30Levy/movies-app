@@ -3,7 +3,7 @@ import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 
 
-export default function MovieInTheater({ name, slots, id, setModal }) {
+export default function MovieInTheater({ name, slots, id, picture, description }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
 
@@ -22,7 +22,8 @@ export default function MovieInTheater({ name, slots, id, setModal }) {
             elementName: 'ShowMovieDetails',
             props: {
                 name,
-                slots
+                slots,
+                description
             }
         }
         modalDataDispatch(goForwardAction(children));
@@ -31,7 +32,7 @@ export default function MovieInTheater({ name, slots, id, setModal }) {
         <div className="theater__movie" onClick={onClickMovie}>
             <h4>{name}</h4>
             <div className="poster__container">
-                <img className="poster" src="./temp/peter-rabbit-2.jpg" alt="movie-poster" />
+                <img className="poster" src={picture || "./movies-images/movies-icon.png"} alt="movie-poster" />
             </div>
             {slots.length > 0 &&
                 <div className="time-slot">

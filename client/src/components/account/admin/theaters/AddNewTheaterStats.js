@@ -1,23 +1,30 @@
 import { nanoid } from 'nanoid';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../../../../contexts/UserContext';
 import { addNewTheater, checkForExistingTheater } from '../../../../server/utils';
 import AdjustTheaterDetails from './AdjustTheaterDetails';
 
 export default function AddNewTheaterStats({ location }) {
+    const { userData } = useContext(UserContext);
     const [addNewTheaterForm, setAddNewTheaterForm] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const onClickAddNewTheater = () => {
         setAddNewTheaterForm(!addNewTheaterForm);
         setErrorMessage("");
     }
-    const onClickSubmit = (theaterDetails, theaterID, movies) => {
+    const onClickSubmit = async (theaterDetails) => {
         setErrorMessage("");
         if (!checkForExistingTheater(theaterDetails.name, location)) {
             const theater = theaterDetails;
-            theater.id = theaterID;
             theater.location = location
-            setAddNewTheaterForm(false)
-            addNewTheater(theater);
+            setAddNewTheaterForm(false);
+            try {
+                await addNewTheater(userData.token, theater);
+            } catch (err) {
+                setErrorMessage(err.response?.data.message || err.message)
+
+            }
+
         } else setErrorMessage('Theater already exists!');
 
     }

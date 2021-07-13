@@ -1,17 +1,21 @@
-import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';
+import { UserContext } from '../../../../contexts/UserContext';
 import { addMovie, getMovieByName } from '../../../../server/utils';
-
+import AddPicture from '../AddPicture';
 export default function AddMovie() {
     const { modalDataDispatch } = useContext(ModalContext);
+    const { userData } = useContext(UserContext);
+
     const [errorMessage, setErrorMessage] = useState("");
 
     const [name, setName] = useState('');
     const [critics, setCritics] = useState('');
     const [description, setDescription] = useState('');
-    const setInput = [setName, setCritics, setDescription];
+    const [picture, setPicture] = useState(null);
+    const [pictureValue, setPictureValue] = useState(null);
+    const setInput = [setName, setDescription, setCritics, setPictureValue];
 
     const onInputText = (event) => {
         setErrorMessage("");
@@ -20,25 +24,31 @@ export default function AddMovie() {
         setInput[index](value);
     };
 
-    const onClickAddTimeSlots = () => {
+    const onClickAddTimeSlots = async () => {
         setErrorMessage("");
         if (getMovieByName(name)) {
             setErrorMessage("Movie already exists!");
         } else {
-            const id = nanoid();
-            addMovie({
-                id, name, description,
-                comments: [],
-                ratings: {
-                    critics,
-                    audience: NaN,
-                    numOfRatings: 0
-                }
-            })
-            modalDataDispatch(goForwardAction({
-                elementName: "AddMovieTimeSlots",
-                props: { id }
-            }))
+            try {
+                const id = await addMovie({
+                    name, description,
+                    comments: [],
+                    ratings: {
+                        critics,
+                        audience: NaN,
+                        numOfRatings: 0
+                    },
+                    picture
+
+                }, userData.token)
+                modalDataDispatch(goForwardAction({
+                    elementName: "AddMovieTimeSlots",
+                    props: { id }
+                }))
+            } catch (err) {
+                setErrorMessage(err.message);
+            }
+
         }
 
     }
@@ -49,6 +59,13 @@ export default function AddMovie() {
             Name:<input id="0" onInput={onInputText} />
             Description:<input id="1" onInput={onInputText} />
             Critics: <input type="number" id="2" onInput={onInputText} />
+            <AddPicture
+                picture={picture}
+                setPicture={setPicture}
+                onInputText={onInputText}
+                pictureValue={pictureValue}
+                setPictureValue={setPictureValue}
+            />
             <button
                 disabled={!name || !critics || !description}
                 onClick={onClickAddTimeSlots}

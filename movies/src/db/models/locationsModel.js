@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const { keys } = require('../../keys/keys');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs')
-const { jwtSecret } = keys;
-const newsSchema = new mongoose.Schema({
+
+const locationSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
@@ -13,16 +10,16 @@ const newsSchema = new mongoose.Schema({
 });
 
 
-newsSchema.methods.toJSON = function () {
+locationSchema.methods.toJSON = function () {
     const user = this;
     const userObject = user.toObject()
-    userObject.id = userObject._id.toString();
 
-    return userObject;
+
+    return userObject.location;
 };
 
 
 
-const News = mongoose.model('News', newsSchema);
+const Location = mongoose.model('Location', locationSchema);
 
-module.exports = News;
+module.exports = Location;

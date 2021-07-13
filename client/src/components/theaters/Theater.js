@@ -1,12 +1,14 @@
-import React from 'react';
-import { moviesData } from '../../data/movies';
+import React, { useContext } from 'react';
 import MovieInTheater from './MovieInTheater';
 import { getMovieAvailability } from '../../server/utils';
 import { nanoid } from 'nanoid';
+import { DataContext } from '../../contexts/DataContext';
 
 export default function Theater({ id, name, movies }) {
+    const { contentData } = useContext(DataContext);
+
     const getMovieSpecs = (movieID) => {
-        return (moviesData.filter(({ id }) => (id === movieID)))[0];
+        return (contentData.moviesData.filter(({ id }) => (id === movieID)))[0];
     };
 
 
@@ -16,8 +18,10 @@ export default function Theater({ id, name, movies }) {
         const result = [];
         for (let movieID of movies) {
             const movie = { id: movieID };
-            const { name, } = getMovieSpecs(movieID); //ratings
+            const { name, picture, description } = getMovieSpecs(movieID); //ratings
             movie.name = name;
+            movie.picture = picture;
+            movie.description = description;
             movie.slots = getMovieAvailability(movieID, id)
 
             result.push(movie);
@@ -34,6 +38,8 @@ export default function Theater({ id, name, movies }) {
                     (<MovieInTheater
                         key={nanoid()}
                         name={movie.name}
+                        picture={movie.picture}
+                        description={movie.description}
                         slots={movie.slots}
                         id={id}
                     />)

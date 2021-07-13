@@ -5,7 +5,7 @@ import Ratings from './Ratings';
 
 
 
-export default function MovieItem({ id, description, name, ratings, comments }) {
+export default function MovieItem({ id, description, name, ratings, comments, picture }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
     const onClickMovie = () => {
@@ -17,7 +17,7 @@ export default function MovieItem({ id, description, name, ratings, comments }) 
     return (
         <div className="item">
             <div className="poster__container" onClick={onClickMovie}>
-                <img className="poster" src="./temp/peter-rabbit-2.jpg" alt="movie-poster" />
+                <img className="poster" src={picture || "./movies-images/movies-icon.png"} alt="movie-poster" />
             </div>
             <Ratings
                 criticsRatings={ratings.critics}

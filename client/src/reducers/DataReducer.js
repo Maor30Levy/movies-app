@@ -4,7 +4,8 @@ export const initialData = {
     availabilityData: [],
     theatersData: [],
     locationsData: [],
-    newsData: []
+    newsData: [],
+    isLoaded: false
 };
 
 const getData = (data) => {
