@@ -5,12 +5,14 @@ import ScrollRight from '../main/ScrollRight';
 import ScrollLeft from '../main/ScrollLeft';
 import { getAvailableMovies } from '../../server/utils';
 import { nanoid } from 'nanoid';
+import { DataContext } from '../../contexts/DataContext';
 
 
 export default function NowPlaying() {
     const { userData } = useContext(UserContext);
+    const { contentData } = useContext(DataContext);
     const scrollBy = (userData.windowWidth) * 24 / 100;
-    const displayMovies = getAvailableMovies();
+    const displayMovies = getAvailableMovies(contentData.moviesData);
     return (
         <div className="now-playing">
             <h3>Now Playing</h3>

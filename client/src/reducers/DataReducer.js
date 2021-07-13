@@ -3,7 +3,8 @@ export const initialData = {
     moviesData: [],
     availabilityData: [],
     theatersData: [],
-    locationsData: []
+    locationsData: [],
+    newsData: []
 };
 
 const getData = (data) => {

@@ -6,10 +6,12 @@ const { jwtSecret } = keys;
 const adminSchema = new mongoose.Schema({
     name: {
         type: String,
+        unique: true,
         required: true
     },
     email: {
         type: String,
+        unique: true,
         required: true
     },
     password: {

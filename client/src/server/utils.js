@@ -2,7 +2,6 @@ import { moviesData } from '../data/movies';
 import { availabilityData } from '../data/availability';
 import { theaters } from '../data/theaters';
 import { locations } from '../data/locations';
-import { news } from '../data/news';
 import { serverURL } from './login';
 import axios from 'axios';
 export const getElementFromArray = (array, key, value) => {
@@ -75,9 +74,9 @@ export const getMovieByID = (movieID) => {
     return getMovies().filter(({ id }) => (movieID === id))[0];
 };
 
-export const getAvailableMovies = () => {
+export const getAvailableMovies = (moviesData) => {
     const result = [];
-    getMovies().forEach((movie) => {
+    moviesData.forEach((movie) => {
         for (let timeSlot of availabilityData) {
             if (movie.id === timeSlot.id) {
                 result.push(movie);
@@ -165,22 +164,63 @@ export const checkForExistingLocation = (location) => {
 
 
 
-export const addArticle = (article) => {
-    console.log(article);
+export const addArticle = async (token, article) => {
+    try {
+        await axios.post(`${serverURL}/data/add-article`, { token, article });
+
+    } catch (err) {
+        console.log(err.message)
+        throw err;
+    }
 };
 
-export const updateArticle = (article) => {
-    console.log(article);
+export const updateArticle = async (id, article, token) => {
+    try {
+        await axios.patch(`${serverURL}/data/update-article`, { id, token, article });
+
+    } catch (err) {
+        throw err
+    }
 };
 
-export const deleteArticles = (articles) => {
-    console.log(articles);
+export const deleteArticles = async (token, articles) => {
+    try {
+        await axios.post(`${serverURL}/data/delete-articles`, { token, articles });
+
+    } catch (err) {
+        throw err
+    }
 };
 
-export const getNews = () => {
+export const getAllData = async () => {
+    const data = {};
+    try {
+        data.newsData = await getArticles();
+        data.moviesData = moviesData;
+        data.availabilityData = availabilityData;
+        data.theatersData = theaters;
+        data.locationsData = locations;
+        return data;
+    } catch (err) {
+        console.log(err)
+    }
+
+};
+
+export const getArticles = async () => {
+    try {
+        const { data } = await axios.get(`${serverURL}/data/get-articles`);
+        return data;
+    } catch (err) {
+        console.log(err)
+    }
+
+};
+
+export const getNews = (news) => {
     return news;
 };
 
-export const getArticleByid = (articleID) => {
-    return getNews().filter(({ id }) => (id === articleID))[0];
+export const getArticleByid = (articleID, articles) => {
+    return articles.filter(({ id }) => (id === articleID))[0];
 };

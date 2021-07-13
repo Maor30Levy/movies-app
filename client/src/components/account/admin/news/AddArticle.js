@@ -1,41 +1,75 @@
-import { nanoid } from 'nanoid';
 import React, { useContext, useState } from 'react'
-import { clearModalAction } from '../../../../actions/ModalActions';
+import { setDataAction } from '../../../../actions/DataActions';
+import { clearModalAction, goForwardAction } from '../../../../actions/ModalActions';
+import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
-import { addArticle } from '../../../../server/utils';
-
+import { UserContext } from '../../../../contexts/UserContext';
+import { addArticle, getArticles } from '../../../../server/utils';
+import AddPicture from '../AddPicture';
 export default function AddArticle() {
+    const { userData } = useContext(UserContext);
     const { modalDataDispatch } = useContext(ModalContext);
+    const { contentDataDispatch } = useContext(DataContext);
     const [name, setName] = useState('');
     const [subTitle, setSubTitle] = useState('');
     const [article, setArticle] = useState('');
-    const setInput = [setName, setSubTitle, setArticle];
+    const [picture, setPicture] = useState(null);
+    const [pictureValue, setPictureValue] = useState(null);
+    const setInput = [setName, setSubTitle, setArticle, setPictureValue];
+    const [errorMessage, setErrorMessage] = useState('');
     const onInputText = (event) => {
+        if (errorMessage !== "") setErrorMessage("")
         const index = event.target.id;
         const value = event.target.value;
         setInput[index](value);
     };
+    const onClickAddPicture = async (event) => {
+        const pictureInput = event.target.previousSibling;
+        const picture = pictureInput.value;
+        setPicture(picture);
 
-    const onClickAdd = () => {
-        addArticle({
-            id: nanoid(),
-            name, subTitle, article,
-            picture: ""
-        })
 
-        modalDataDispatch(clearModalAction());
+    }
+    const onClickAdd = async () => {
+        try {
+            await addArticle(userData.token, { name, subTitle, article, picture });
+
+            modalDataDispatch(clearModalAction());
+            const newsData = await getArticles();
+            contentDataDispatch(setDataAction({ newsData }))
+            modalDataDispatch(goForwardAction({
+                elementName: "ApprovalMessage",
+                props: { message: "Article Added!" }
+            }));
+        } catch (err) {
+            if (err.response) setErrorMessage(err.response.data.message);
+            else setErrorMessage(err.message);
+        }
+
     };
     return (
         <div className="add-article">
             Title:<input id="0" onInput={onInputText} />
             Sub-Title:<input id="1" onInput={onInputText} />
             Article:<textarea id="2" onInput={onInputText} />
-            Picture:<input type="file" />
+            Picture:
+            <div>
+                <input id="3" onInput={onInputText} />
+                {!picture && <button onClick={onClickAddPicture} disabled={!pictureValue}>Add</button>}
+            </div>
+            {!!picture && <AddPicture
+                picture={picture}
+                setPicture={setPicture}
+                setPictureValue={setPictureValue}
+            />}
             <button
                 disabled={!name || !subTitle || !article}
                 onClick={onClickAdd}
             >
                 Add Article</button>
+            {
+                errorMessage !== '' && <div className="error-message">{errorMessage}</div>
+            }
         </div>
     )
 }

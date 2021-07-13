@@ -48,7 +48,10 @@
         outline: none;
       }
     }
-    
+    .approval-message{
+      display: flex;
+      justify-content: center;
+    }
 }
 
 .modal__option{

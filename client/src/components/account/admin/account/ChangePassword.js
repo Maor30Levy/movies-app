@@ -98,7 +98,7 @@ export default function ChangePassword() {
                 props: { message: "Password successfully updated!" }
             }));
         } catch (err) {
-            setErrorMessage(err.response?.statusText);
+            setErrorMessage(err.response?.data.message || "Server unavailable");
         }
     }
     return (

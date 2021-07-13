@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
         return res.send(result.data);
 
     } catch (err) {
-        if (err.response.statusText) {
+        if (err.response?.statusText) {
             console.log(err.response.statusText);
             return res.status(err.response.status).send({ message: err.response.statusText });
         }
@@ -50,7 +50,7 @@ router.post('/logout', async (req, res) => {
         return res.send();
 
     } catch (err) {
-        if (err.response.statusText) {
+        if (err.response?.statusText) {
             console.log(err.response.statusText);
             return res.status(err.response.status).send({ message: err.response.statusText });
         }

@@ -5,14 +5,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 const { port } = keys;
-const authRouter = require('./routers/AuthRouter');
-const dataRouter = require('./routers/DataRouter');
-const bufferRouter = require('./routers/BufferRouter');
-
-app.use(authRouter);
-app.use(dataRouter);
-app.use(bufferRouter);
-
+const appRouter = require('./routers/appRouter');
+app.use(appRouter);
 app.listen(port, () => {
     console.log(`Server is up on port ${port}!`);
 });

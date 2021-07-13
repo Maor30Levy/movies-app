@@ -2,18 +2,34 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom';
 import ItemSearch from './ItemSearch';
 import { UserContext } from '../../contexts/UserContext';
+import { DataContext } from '../../contexts/DataContext';
 import { logoutAction, setWindowAction } from '../../actions/UserActions';
 import { logout } from '../../server/login';
-
+import { getAllData } from '../../server/utils';
+import LoaderContainer from './LoaderContainer';
+import { setDataAction } from '../../actions/DataActions';
 export default function Header() {
     const { userData, userDataDispatch } = useContext(UserContext);
+    const { contentDataDispatch } = useContext(DataContext);
+    const [componentOn, setComponentOn] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [isQuery, setIsQuery] = useState(false);
     const [onInput, setOnInput] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
+        setComponentOn(true);
         userDataDispatch(setWindowAction(window.innerWidth));
-    }, [userDataDispatch]);
+        if (componentOn) getAllData().then((res) => {
+            contentDataDispatch(setDataAction(res))
+            setIsLoaded(true)
+        }).catch((err) => {
+            console.log(err)
+        });
+        return () => {
+            setComponentOn(false);
+        }
+    }, [userDataDispatch, contentDataDispatch, componentOn]);
 
     const onInputQuery = (event) => {
         const input = event.target.value;
@@ -76,6 +92,7 @@ export default function Header() {
             </div>
             {userData.loggedIn && <div className="logout" onClick={onClickLogout}>Logout</div>}
             {onInput && <ItemSearch />}
+            {!isLoaded && <LoaderContainer />}
         </div>
     )
 }
