@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const TimeSlot = require('./timeslotsModel');
 
 const movieSchema = new mongoose.Schema({
     name: {
@@ -25,11 +26,9 @@ const movieSchema = new mongoose.Schema({
     },
     comments: [
         {
-            comment: {
-                user: { type: String },
-                comment: { type: String },
-                id: { type: String },
-            }
+            user: { type: String },
+            comment: { type: String },
+            id: { type: String },
         }
 
     ],
@@ -41,7 +40,11 @@ const movieSchema = new mongoose.Schema({
 });
 
 
-
+movieSchema.pre('remove', async function (next) {
+    const movie = this
+    await TimeSlot.deleteMany({ owner: movie._id })
+    next()
+});
 
 movieSchema.methods.toJSON = function () {
     const user = this;

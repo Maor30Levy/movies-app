@@ -4,7 +4,7 @@ import { ModalContext } from '../../contexts/ModalContext';
 import { UserContext } from '../../contexts/UserContext';
 
 
-export default function Ratings({ criticsRatings, audienceRatings }) {
+export default function Ratings({ criticsRatings, audienceRatings, id }) {
     const { modalDataDispatch } = useContext(ModalContext);
     const { userData } = useContext(UserContext);
 
@@ -16,7 +16,7 @@ export default function Ratings({ criticsRatings, audienceRatings }) {
 
     const onClickAddComment = () => {
         modalDataDispatch(goForwardAction(
-            { elementName: 'AddComment', props: {} }
+            { elementName: 'AddComment', props: { id } }
         ));
 
     }

@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { goForwardAction } from '../../../../actions/ModalActions';
+import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { getMovies } from '../../../../server/utils';
 import AdjustItems from '../AdjustItems';
 
 export default function UpdateMovie() {
     const { modalDataDispatch } = useContext(ModalContext);
+    const { contentData } = useContext(DataContext);
 
     const onClickSubmit = (id) => {
         modalDataDispatch(goForwardAction({
@@ -22,7 +24,7 @@ export default function UpdateMovie() {
             <AdjustItems
                 itemType={"Movies"}
                 getItems={getMovies}
-                getItemsParams={undefined}
+                getItemsParams={contentData.moviesData}
                 onSubmitFunc={onClickSubmit}
                 adjustType={"Update"}
             />

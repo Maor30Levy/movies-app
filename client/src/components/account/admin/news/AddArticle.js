@@ -4,7 +4,7 @@ import { clearModalAction, goForwardAction } from '../../../../actions/ModalActi
 import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import { addArticle, getArticles } from '../../../../server/utils';
+import { addArticle, getData } from '../../../../server/utils';
 import AddPicture from '../AddPicture';
 export default function AddArticle() {
     const { userData } = useContext(UserContext);
@@ -29,7 +29,7 @@ export default function AddArticle() {
             await addArticle(userData.token, { name, subTitle, article, picture });
 
             modalDataDispatch(clearModalAction());
-            const newsData = await getArticles();
+            const newsData = await getData('articles');
             contentDataDispatch(setDataAction({ newsData }))
             modalDataDispatch(goForwardAction({
                 elementName: "ApprovalMessage",

@@ -1,9 +1,21 @@
 import React from 'react';
 
-export default function Reservation({ row, seat }) {
+export default function Reservation({ orderDetails }) {
+    const {
+        cell,
+        day,
+        hourIndex,
+        movieID,
+        theaterID
+    } = orderDetails
+
     return (
         <div>
-            Row: {row}, Seat: {seat}
+            {cell,
+                day,
+                hourIndex,
+                movieID,
+                theaterID}
         </div>
     )
 }

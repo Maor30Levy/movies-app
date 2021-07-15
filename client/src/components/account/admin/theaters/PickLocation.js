@@ -1,9 +1,11 @@
 import { nanoid } from 'nanoid';
-import React from 'react';
-import { getLocations } from '../../../../server/utils';
+import React, { useContext } from 'react';
+import { DataContext } from '../../../../contexts/DataContext';
 
 export default function PickLocation({ clickLoactionFunc }) {
-    const locations = getLocations();
+    const { contentData } = useContext(DataContext);
+
+    const locations = contentData.locationsData;
     const onClickLocation = (event) => {
         const location = event.target.innerText;
         clickLoactionFunc(location)

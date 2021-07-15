@@ -1,20 +1,20 @@
 import React, { useContext } from 'react'
-import { theaters } from '../../data/theaters'
-import { locations } from '../../data/locations';
 import ShowTheaters from './ShowTheaters';
 import { UserContext } from '../../contexts/UserContext';
 import { setLocationAction } from '../../actions/UserActions';
 import { nanoid } from 'nanoid';
+import { DataContext } from '../../contexts/DataContext';
 
-const getLocations = () => (locations);
-const getTheaters = (requestedLocation) => {
-    return theaters.filter(({ location }) => (location === requestedLocation));
-};
+
 
 
 export default function Theaters() {
+    const { contentData } = useContext(DataContext);
     const { userData, userDataDispatch } = useContext(UserContext);
-    const locations = getLocations();
+    const getTheaters = (requestedLocation) => {
+        return contentData.theatersData.filter(({ location }) => (location === requestedLocation));
+    };
+    const locations = contentData.locationsData;
     const onClickLocation = (event) => {
         const location = event.target.previousSibling.value;
         userDataDispatch(setLocationAction(location));

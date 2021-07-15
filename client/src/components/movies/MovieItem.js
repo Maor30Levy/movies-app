@@ -22,6 +22,7 @@ export default function MovieItem({ id, description, name, ratings, comments, pi
             <Ratings
                 criticsRatings={ratings.critics}
                 audienceRatings={ratings.audience}
+                id={id}
             />
             <div className="movie-name" onClick={onClickMovie}>{name}</div>
         </div>

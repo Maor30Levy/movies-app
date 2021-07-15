@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
 import { ModalContext } from '../../../../contexts/ModalContext';
-import { getMovieByID, getMovies, getTheaterByID } from '../../../../server/utils';
+import { getMovieByID, getTheaterByID } from '../../../../server/utils';
 import { nanoid } from 'nanoid';
-
+import { DataContext } from '../../../../contexts/DataContext';
 export default function UpdateTheaterStats({ id }) {
     const { modalDataDispatch } = useContext(ModalContext);
-
-    const { name, movies, seats } = getTheaterByID(id);
+    const { contentData } = useContext(DataContext);
+    const { name, movies, seats } = getTheaterByID(id, contentData.theatersData);
     const [nameValue, setNameValue] = useState(name);
     const [seatsValue, setSeatsValue] = useState(seats);
     const [moviesList, setMoviesList] = useState(movies);
     const setValues = [setNameValue, setSeatsValue];
     const [addMoreMovies, setAddMoreMovies] = useState(false);
-    const allMovies = getMovies();
+    const allMovies = contentData.moviesData;
     const [displyMovies, setDisplayMovies] = useState([...allMovies])
 
     const filterItems = (event) => {
@@ -81,7 +81,7 @@ export default function UpdateTheaterStats({ id }) {
             <div>Seats: <input id="1" value={seatsValue} type="number" onChange={onChangeValue} /></div>
             <div className="movies-in-theater">
                 {moviesList.map((movieID, i) => {
-                    const { name } = getMovieByID(movieID);
+                    const { name } = getMovieByID(movieID, contentData.moviesData);
                     return (<div className="listed-movie" key={nanoid()} id={i} onClick={onClickRemove}>
                         <div className="remove">Remove</div>{name}
                     </div>)

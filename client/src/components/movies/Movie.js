@@ -4,16 +4,20 @@ import { ModalContext } from '../../contexts/ModalContext';
 import { getMovieAvailabilityAll } from '../../server/utils';
 import ShowComments from './ShowComments';
 import { nanoid } from 'nanoid';
+import { DataContext } from '../../contexts/DataContext';
 
 export default function Movie({ description, comments, id }) {
     const { modalDataDispatch } = useContext(ModalContext);
-    const allSlots = getMovieAvailabilityAll(id);
+    const { contentData } = useContext(DataContext);
+
+    const allSlots = getMovieAvailabilityAll(id, contentData.theatersData, contentData.availabilityData);
 
     const onClickTheater = (event) => {
         const { name, slots } = allSlots[event.target.id];
+        const theaterID = event.target.parentElement.id;
         modalDataDispatch(goForwardAction({
             elementName: "ShowMovieDetails",
-            props: { name, slots }
+            props: { name, slots, movieID: id, theaterID }
         }));
     }
     return (
@@ -22,8 +26,8 @@ export default function Movie({ description, comments, id }) {
                 {description}
             </div>
             <div className="theater-options">
-                {allSlots.map(({ theater, location }, i) => (
-                    <div key={nanoid()}>
+                {allSlots.map(({ theater, location, theaterID }, i) => (
+                    <div key={nanoid()} id={theaterID}>
                         <div className="modal__option" onClick={onClickTheater} id={i}>
                             {`${theater}, ${location}`}
                         </div>

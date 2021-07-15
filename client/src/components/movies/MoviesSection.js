@@ -3,7 +3,6 @@ import MovieItem from './MovieItem'
 import { UserContext } from '../../contexts/UserContext';
 import ScrollRight from '../main/ScrollRight';
 import ScrollLeft from '../main/ScrollLeft';
-import { getAvailableMovies } from '../../server/utils';
 import { nanoid } from 'nanoid';
 import { DataContext } from '../../contexts/DataContext';
 

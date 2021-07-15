@@ -4,7 +4,7 @@ import { clearModalAction, goForwardAction } from '../../../../actions/ModalActi
 import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import { deleteArticles, getArticleByid, getArticles, getNews } from '../../../../server/utils'
+import { deleteArticles, getArticleByid, getData, getNews } from '../../../../server/utils'
 import DeleteItems from '../DeleteItems'
 export default function DeleteArticle() {
     const { userData } = useContext(UserContext);
@@ -29,7 +29,7 @@ export default function DeleteArticle() {
         try {
             await deleteArticles(userData.token, articles)
 
-            const newsData = await getArticles();
+            const newsData = await getData('articles');
             contentDataDispatch(setDataAction({ newsData }))
             modalDataDispatch(clearModalAction());
             modalDataDispatch(goForwardAction({

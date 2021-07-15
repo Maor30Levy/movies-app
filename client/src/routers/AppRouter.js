@@ -11,7 +11,6 @@ import UserContextProvider from '../contexts/UserContext';
 import DataContextProvider from '../contexts/DataContext';
 import Article from '../components/news/Article';
 import ArticleRoute from './ArticleRoute';
-import Home from '../components/main/Home';
 export default function AppRouter() {
     return (
         <BrowserRouter>
@@ -23,7 +22,6 @@ export default function AppRouter() {
                             <Route path="/" exact>
                                 <Redirect to="/movies" />
                             </Route>
-                            {/* <Route path="/home" component={Home} /> */}
                             <Route path="/movies" component={Movies} />
                             <Route path="/account" component={Account} />
                             <ArticleRoute path="/news/article" component={Article} />

@@ -6,14 +6,10 @@ const timeslotSchema = new mongoose.Schema({
         required: true,
         ref: 'Movie'
     },
-    timeslot: [
-        {
-            theater: { type: String },
-            slots: []
-        }
-    ]
-
-
+    theater: { type: String },
+    slots: [],
+    hasOpenSeats: { type: Boolean },
+    name: { type: String },
 });
 
 

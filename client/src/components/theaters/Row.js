@@ -1,12 +1,41 @@
 import React, { useContext } from 'react'
-import { goForwardAction } from '../../actions/ModalActions';
+import { setDataAction } from '../../actions/DataActions';
+import { clearModalAction, goForwardAction } from '../../actions/ModalActions';
+import { DataContext } from '../../contexts/DataContext';
 import { ModalContext } from '../../contexts/ModalContext';
+import { UserContext } from '../../contexts/UserContext';
+import { getData, reserveSeat } from '../../server/utils';
 
-export default function Row({ seats, row }) {
+export default function Row({ seats, row, slotIndex, day, movieID, theaterID, setErrorMessage }) {
     const { modalDataDispatch } = useContext(ModalContext);
-    const onClickSeat = (event) => {
+    const { userData } = useContext(UserContext);
+    const { contentDataDispatch } = useContext(DataContext);
+
+    const onClickSeat = async (event) => {
+        setErrorMessage("")
         const seat = event.target.id;
-        modalDataDispatch(goForwardAction({ elementName: 'Reservation', props: { row, seat } }));
+        const cell = parseInt((row - 1) * 12) + parseInt(seat) - 1;
+        const orderDetails = {
+            cell,
+            day,
+            hourIndex: slotIndex,
+            movieID,
+            theaterID
+        }
+        try {
+            await reserveSeat(userData.token, orderDetails);
+            const availabilityData = await getData('timeslots');
+            contentDataDispatch(setDataAction({ availabilityData }));
+            modalDataDispatch(clearModalAction());
+            modalDataDispatch(goForwardAction({
+                elementName: "Reservation",
+                props: { orderDetails }
+            }));
+        } catch (err) {
+            setErrorMessage(err.response?.data.message || err.message)
+
+        }
+
     }
 
     return (

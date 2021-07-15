@@ -18,13 +18,16 @@ export default function Theater({ id, name, movies }) {
         const result = [];
         for (let movieID of movies) {
             const movie = { id: movieID };
-            const { name, picture, description } = getMovieSpecs(movieID); //ratings
-            movie.name = name;
-            movie.picture = picture;
-            movie.description = description;
-            movie.slots = getMovieAvailability(movieID, id)
+            const movieSpecs = getMovieSpecs(movieID);
+            if (movieSpecs) {
+                const { name, picture, description } = movieSpecs; //ratings
+                movie.name = name;
+                movie.picture = picture;
+                movie.description = description;
+                movie.slots = getMovieAvailability(movieID, id, contentData.availabilityData)
+                result.push(movie);
+            }
 
-            result.push(movie);
         }
         return result;
     };
@@ -42,6 +45,7 @@ export default function Theater({ id, name, movies }) {
                         description={movie.description}
                         slots={movie.slots}
                         id={id}
+                        movieID={movie.id}
                     />)
                 )
                 }

@@ -3,7 +3,7 @@ import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 
 
-export default function MovieInTheater({ name, slots, id, picture, description }) {
+export default function MovieInTheater({ name, slots, id, picture, description, movieID }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
 
@@ -23,7 +23,9 @@ export default function MovieInTheater({ name, slots, id, picture, description }
             props: {
                 name,
                 slots,
-                description
+                description,
+                movieID,
+                theaterID: id
             }
         }
         modalDataDispatch(goForwardAction(children));

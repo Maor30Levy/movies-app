@@ -1,13 +1,16 @@
 import React, { useContext, useState } from 'react'
 import { goForwardAction } from '../../../../actions/ModalActions';
+import { setDataAction } from '../../../../actions/DataActions';
+import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import { addMovie, getMovieByName } from '../../../../server/utils';
+import { addMovie, getData, getMovieByName } from '../../../../server/utils';
 import AddPicture from '../AddPicture';
 export default function AddMovie() {
+
     const { modalDataDispatch } = useContext(ModalContext);
     const { userData } = useContext(UserContext);
-
+    const { contentData, contentDataDispatch } = useContext(DataContext);
     const [errorMessage, setErrorMessage] = useState("");
 
     const [name, setName] = useState('');
@@ -26,7 +29,7 @@ export default function AddMovie() {
 
     const onClickAddTimeSlots = async () => {
         setErrorMessage("");
-        if (getMovieByName(name)) {
+        if (getMovieByName(name, contentData.moviesData)) {
             setErrorMessage("Movie already exists!");
         } else {
             try {
@@ -40,13 +43,16 @@ export default function AddMovie() {
                     },
                     picture
 
-                }, userData.token)
+                }, userData.token);
+                const moviesData = await getData('movies');
+                contentDataDispatch(setDataAction({ moviesData }));
                 modalDataDispatch(goForwardAction({
                     elementName: "AddMovieTimeSlots",
                     props: { id }
                 }))
             } catch (err) {
-                setErrorMessage(err.message);
+                if (err.response) setErrorMessage(err.response.data.message);
+                else setErrorMessage(err.message);
             }
 
         }
@@ -67,7 +73,7 @@ export default function AddMovie() {
                 setPictureValue={setPictureValue}
             />
             <button
-                disabled={!name || !critics || !description}
+                disabled={!name || !critics || !description || critics <= 0 || critics > 1}
                 onClick={onClickAddTimeSlots}
             >Add Time Slots</button>
             {!!errorMessage && <div className="error-message">{errorMessage}</div>}

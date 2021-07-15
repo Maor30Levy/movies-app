@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const theaterSchema = new mongoose.Schema({
     name: {
         type: String,
-        unique: true,
+        unique: false,
         required: true
     },
     location: {

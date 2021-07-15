@@ -4,14 +4,13 @@ import { nanoid } from 'nanoid';
 import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 
-export default function ShowMovieDetails({ name, slots, description }) {
+export default function ShowMovieDetails({ name, slots, description, movieID, theaterID }) {
 
     const { modalDataDispatch } = useContext(ModalContext);
-
     const onClickShowHours = (event, slot) => {
         const day = (Object.keys(slot))[0];
         const seats = slot[day][event.target.id].seats;
-        modalDataDispatch(goForwardAction({ elementName: 'Seats', props: { seats } }));
+        modalDataDispatch(goForwardAction({ elementName: 'Seats', props: { seats, slotIndex: event.target.id, day, movieID, theaterID } }));
     };
     return (
         <div>

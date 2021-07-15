@@ -4,7 +4,7 @@ import { goForwardAction } from '../../../../actions/ModalActions';
 import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import { getArticleByid, getArticles, updateArticle } from '../../../../server/utils'
+import { getArticleByid, getData, updateArticle } from '../../../../server/utils'
 
 export default function UpdateArticleStats({ id }) {
     const { contentData, contentDataDispatch } = useContext(DataContext);
@@ -34,11 +34,11 @@ export default function UpdateArticleStats({ id }) {
                 article: articleValue,
                 picture: pictureValue
             }, userData.token);
-            const newsData = await getArticles();
+            const newsData = await getData('articles');
             contentDataDispatch(setDataAction({ newsData }))
             modalDataDispatch(goForwardAction({
                 elementName: "ApprovalMessage",
-                props: { message: "Article Added!" }
+                props: { message: "Article Updated!" }
             }));
         } catch (err) {
             setErrorMessage(err.message)

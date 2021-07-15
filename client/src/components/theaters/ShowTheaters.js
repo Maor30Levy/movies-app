@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { setLocationAction } from '../../actions/UserActions';
 import { UserContext } from '../../contexts/UserContext';
 import { ModalContext } from '../../contexts/ModalContext';
@@ -19,7 +19,7 @@ export default function ShowTheaters({ theaters, location }) {
                 <h3>Theaters in {location}</h3>
                 <div className="change-location" onClick={onClickChangeLocation}>Change Location</div>
             </div>
-            {theaters.map(
+            {theaters.length > 0 ? theaters.map(
                 (theater) =>
                 (<Theater
                     key={nanoid()}
@@ -27,7 +27,8 @@ export default function ShowTheaters({ theaters, location }) {
                     name={theater.name}
                     movies={theater.movies}
                 />)
-            )}
+            ) :
+                <h3>No theaters available.</h3>}
             {modalData.isModal && <Modal />}
         </div>
     )

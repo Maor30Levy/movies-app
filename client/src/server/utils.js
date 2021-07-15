@@ -1,6 +1,3 @@
-import { availabilityData } from '../data/availability';
-import { theaters } from '../data/theaters';
-import { locations } from '../data/locations';
 import { serverURL } from './login';
 import axios from 'axios';
 export const getElementFromArray = (array, key, value) => {
@@ -32,7 +29,6 @@ export const getAdminsData = async (token) => {
 
 }
 
-
 export const deleteAdmins = async (adminsIDsArray, token) => {
     try {
         await axios.post(`${serverURL}/data/admin/delete`, { token, admins: adminsIDsArray });
@@ -41,6 +37,9 @@ export const deleteAdmins = async (adminsIDsArray, token) => {
         console.log(err.response?.statusText)
     }
 }
+
+
+
 
 export const addMovie = async (movie, token) => {
     const { data } = await axios.post(`${serverURL}/data/add-movie/`, { movie, token });
@@ -51,15 +50,9 @@ export const updateMovie = (movieID, fieldsToUpdate) => {
     console.log(movieID, fieldsToUpdate);
 };
 
-export const deleteMovies = (movies) => {
-    console.log(movies);
-};
+export const deleteMovies = async (movies, token) => {
+    await axios.post(`${serverURL}/data/delete-movies/`, { movies, token });
 
-export const getMovieAvailability = (movieID, theaterID) => {
-    const movie = (availabilityData.filter(({ id }) => (id === movieID)))[0];
-    const availableSlots = movie.timeSlot.filter(({ theater, hasOpenSeats }) => (theater === theaterID && hasOpenSeats))
-    const result = availableSlots.map((slot) => (slot.slots))
-    return result;
 };
 
 export const getMovies = (moviesData) => {
@@ -67,22 +60,22 @@ export const getMovies = (moviesData) => {
 };
 
 export const getMovieByName = (movieName, moviesData) => {
-    return getMovies(moviesData).filter(({ name }) => (movieName === name))[0];
+    return moviesData.filter(({ name }) => (movieName === name))[0];
 };
 
 export const getMovieByID = (movieID, moviesData) => {
     return getMovies(moviesData).filter(({ id }) => (movieID === id))[0];
 };
 
-export const getAvailableMovies = (moviesData) => {
+export const getAvailableMovies = (moviesData, availabilityData) => {
     const result = [];
     moviesData.forEach((movie) => {
-        // for (let timeSlot of availabilityData) {
-        //     if (movie.id === timeSlot.id) {
-        result.push(movie);
-        //     break;
-        // }
-        // }
+        for (let timeSlot of availabilityData) {
+            if (movie.id === timeSlot.owner) {
+                result.push(movie);
+                break;
+            }
+        }
     });
     return result;
 };
@@ -92,26 +85,59 @@ export const getUnavailableMovies = (moviesData, availabilityData) => {
     moviesData.forEach((movie) => {
         let found = false;
         for (let timeSlot of availabilityData) {
-            if (movie.id === timeSlot.id) found = true;
+            if (movie.id === timeSlot.owner) found = true;
         }
         if (!found) result.push(movie);
     });
     return result;
 };
 
-export const getMovieAvailabilityAll = (movieID) => {
+export const getMovieAvailability = (movieID, theaterID, availabilityData) => {
+    try {
+        const availableSlots = (availabilityData.filter(({ owner, theater, hasOpenSeats }) => (owner === movieID && theater === theaterID && hasOpenSeats)));
+        const result = availableSlots.map((slot) => (slot.slots))
+        return result;
+    } catch (err) {
+        console.log(err.message)
+        return []
+    }
+
+};
+
+export const getMovieAvailabilityAll = (movieID, theaters, availabilityData) => {
     const result = [];
     const availableTheaters = theaters.filter(({ movies }) => (movies.includes(movieID)));
-    for (let theater of availableTheaters) result.push({ theater: theater.name, location: theater.location, slots: getMovieAvailability(movieID, theater.id) });
+    for (let theater of availableTheaters) result.push({ theater: theater.name, location: theater.location, slots: getMovieAvailability(movieID, theater.id, availabilityData), theaterID: theater.id });
     return result;
 };
 
 
-export const addAvailability = (availability) => {
-    console.log(availability)
+export const addAvailability = async (id, timeSlot, token) => {
+    try {
+        await axios.post(`${serverURL}/data/add-movie-timeslot`, { id, timeSlot, token });
+
+    } catch (err) {
+        throw err
+    }
 }
 
+export const addComment = async (token, comment, id) => {
+    try {
+        await axios.patch(`${serverURL}/data/add-comment`, { token, comment, id });
 
+    } catch (err) {
+        throw err
+    }
+}
+
+export const reserveSeat = async (token, orderDetails) => {
+    try {
+        await axios.patch(`${serverURL}/data/add-seat`, { token, orderDetails });
+
+    } catch (err) {
+        throw err
+    }
+}
 
 export const addNewTheater = async (token, theater) => {
     try {
@@ -126,7 +152,7 @@ export const deleteTheaters = (theaters) => {
     console.log(theaters);
 };
 
-export const getTheaterByID = (theaterID) => {
+export const getTheaterByID = (theaterID, theaters) => {
     try {
         const { name, movies, seats, location } = theaters.filter(({ id }) => (theaterID === id))[0];
         return { name, movies, seats, location }
@@ -135,30 +161,49 @@ export const getTheaterByID = (theaterID) => {
     }
 };
 
-export const checkForExistingTheater = (theaterName, theaterLocation) => {
+export const checkForExistingTheater = (theaterName, theaterLocation, theaters) => {
     return theaters.filter(({ name, location }) => (
         name === theaterName && location === theaterLocation
     )).length > 0
 };
 
-export const getTheatersByLocation = (location) => {
+export const getTheatersByLocation = ({ location, theaters }) => {
     return theaters.filter((theater) => (location === theater.location));
 };
 
-export const getTheaters = () => {
+export const getTheaters = (theaters) => {
     return theaters.map(({ name, id, location }) => ({ name: `${name} - ${location}`, id }));
-}
-
-export const getAllTheaterTimeSlots = (theaterID, movies) => {
-    const result = [];
-    movies.forEach((movie) => {
-        const arrResult = getElementFromArray(availabilityData, "id", movie) || { timeSlot: {} };
-        result.push({ movieID: movie, slots: getElementFromArray(arrResult.timeSlot, "theater", theaterID) || { theater: theaterID, slots: [] } })
-    })
-    return result;
 };
 
-export const getLocations = () => {
+export const updateTheater = async (token, theaterID, oldMoviesList, theaterDetails, newTimeSlots) => {
+    try {
+        const allMovies = [];
+        const length = oldMoviesList.length > theaterDetails.movies.length ?
+            oldMoviesList.length :
+            theaterDetails.movies.length;
+        for (let i = 0; i < length; i++) {
+            if (!allMovies.includes(theaterDetails.movies[i])) allMovies.push(theaterDetails.movies[i]);
+            if (!allMovies.includes(oldMoviesList[i])) allMovies.push(theaterDetails.movies[i]);
+
+        }
+        await axios.post(`${serverURL}/data/update-theater`, { token, theaterID, oldMoviesList, theaterDetails, allMovies, newTimeSlots });
+
+    } catch (err) {
+        throw err
+    }
+}
+
+export const getAllTheaterTimeSlots = (theaterID, movies, availabilityData) => {
+    const result = [];
+    const filterdData = availabilityData.filter(({ theater }) => (theater === theaterID))
+    movies.forEach((movie) => {
+        const slots = filterdData.filter(({ owner }) => (owner === movie))[0]?.slots;
+        if (slots) result.push({ movieID: movie, slots })
+    })
+    return result || [];
+};
+
+export const getLocations = (locations) => {
     return locations;
 };
 
@@ -171,9 +216,9 @@ export const addNewLocation = async (token, name) => {
     }
 };
 
-export const deleteLocation = (location) => {
+export const deleteLocation = (location, theaters) => {
     console.log(location);
-    const locationTheaters = getTheatersByLocation(location).map(({ id }) => (id)) || [];
+    const locationTheaters = getTheatersByLocation({ location, theaters }).map(({ id }) => (id)) || [];
     console.log(locationTheaters);
 };
 
@@ -217,11 +262,11 @@ export const deleteArticles = async (token, articles) => {
 export const getAllData = async () => {
     const data = {};
     try {
-        data.newsData = await getArticles();
-        data.moviesData = await getMoviesData();
-        data.availabilityData = availabilityData;
-        data.theatersData = theaters;
-        data.locationsData = locations;
+        data.newsData = await getData('articles');
+        data.moviesData = await getData('movies');
+        data.availabilityData = await getData('timeslots');
+        data.theatersData = await getData('theaters');
+        data.locationsData = await getData('locations');
         data.isLoaded = true;
         return data;
     } catch (err) {
@@ -230,19 +275,9 @@ export const getAllData = async () => {
 
 };
 
-export const getArticles = async () => {
+export const getData = async (section) => {
     try {
-        const { data } = await axios.get(`${serverURL}/data/get-articles`);
-        return data;
-    } catch (err) {
-        console.log(err)
-    }
-
-};
-
-export const getMoviesData = async () => {
-    try {
-        const { data } = await axios.get(`${serverURL}/data/get-movies`);
+        const { data } = await axios.get(`${serverURL}/data/get-${section}`);
         return data;
     } catch (err) {
         console.log(err)

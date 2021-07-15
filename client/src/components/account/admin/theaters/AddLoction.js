@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react'
+import { setDataAction } from '../../../../actions/DataActions';
 import { goForwardAction } from '../../../../actions/ModalActions';
 import { DataContext } from '../../../../contexts/DataContext';
 import { ModalContext } from '../../../../contexts/ModalContext';
 import { UserContext } from '../../../../contexts/UserContext';
-import { addNewLocation, checkForExistingLocation } from '../../../../server/utils';
+import { addNewLocation, checkForExistingLocation, getData } from '../../../../server/utils';
 
 export default function AddLoction() {
     const { modalDataDispatch } = useContext(ModalContext);
-    const { contentData } = useContext(DataContext);
+    const { contentData, contentDataDispatch } = useContext(DataContext);
     const { userData } = useContext(UserContext);
 
     const [location, setLocation] = useState("");
@@ -23,6 +24,8 @@ export default function AddLoction() {
         if (!checkForExistingLocation(location, contentData.locationsData)) {
             try {
                 await addNewLocation(userData.token, location);
+                const locationsData = await getData('locations');
+                contentDataDispatch(setDataAction({ locationsData }));
                 modalDataDispatch(goForwardAction({
                     elementName: "AddNewTheaterStats",
                     props: {

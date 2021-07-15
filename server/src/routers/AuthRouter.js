@@ -23,7 +23,9 @@ router.post('/subscribe', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
+
         const { isAdmin, email, password } = req.body;
+        console.log(isAdmin, email, password)
         const path = isAdmin ? "admin" : "user";
         const result = await axios.post(`${authURL}/${path}/login`, { email, password });
         return res.send(result.data);
