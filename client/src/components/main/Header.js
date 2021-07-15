@@ -15,6 +15,7 @@ export default function Header() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isQuery, setIsQuery] = useState(false);
     const [onInput, setOnInput] = useState(false);
+    const [itemInput, setItemInput] = useState('')
     const history = useHistory();
 
     useEffect(() => {
@@ -32,7 +33,8 @@ export default function Header() {
     }, [userDataDispatch, contentDataDispatch, componentOn]);
 
     const onInputQuery = (event) => {
-        const input = event.target.value;
+        const input = event.target.value.trim().toLowerCase();
+        setItemInput(input);
         setIsQuery(input !== "" ? true : false)
     };
 
@@ -74,7 +76,7 @@ export default function Header() {
                 <div className="header__search_bar">
                     <div className="bar">
                         <img className="find-icon" src="./icons/header/find_icon.png" alt="find" />
-                        <input placeholder="Movies and Shows"
+                        <input placeholder="Movies and News"
                             onInput={onInputQuery}
                             onFocus={onFocusInput}
                         />
@@ -91,7 +93,7 @@ export default function Header() {
                 </div>}
             </div>
             {userData.loggedIn && <div className="logout" onClick={onClickLogout}>Logout</div>}
-            {onInput && <ItemSearch />}
+            {onInput && <ItemSearch itemInput={itemInput} />}
             {!isLoaded && <LoaderContainer />}
         </div>
     )
