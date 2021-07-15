@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom';
 import { DataContext } from '../../contexts/DataContext';
 export default function News() {
+
     const { contentData } = useContext(DataContext);
     const history = useHistory();
     const news = contentData.newsData;
@@ -14,12 +15,14 @@ export default function News() {
     }
     return (
         <div className="news__main">
-            {news.map(({ name, picture, id }) => (
-                <div key={id} id={id} className="article" onClick={onClickArticle}>
-                    <img src={picture || './news-images/non-picture.jpg'} alt="article_pitcure" />
-                    <h1>{name}</h1>
-                </div>
-            ))}
+            <div className="news__container">
+                {news.map(({ name, picture, id }) => (
+                    <div key={id} id={id} className="article" onClick={onClickArticle}>
+                        <img src={picture || './news-images/non-picture.jpg'} alt="article_pitcure" />
+                        <h1>{name}</h1>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

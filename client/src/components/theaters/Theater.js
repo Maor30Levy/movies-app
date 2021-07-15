@@ -2,10 +2,16 @@ import React, { useContext } from 'react';
 import MovieInTheater from './MovieInTheater';
 import { getMovieAvailability } from '../../server/utils';
 import { nanoid } from 'nanoid';
+import ScrollRight from '../main/ScrollRight';
+import ScrollLeft from '../main/ScrollLeft';
 import { DataContext } from '../../contexts/DataContext';
+import { UserContext } from '../../contexts/UserContext';
 
 export default function Theater({ id, name, movies }) {
     const { contentData } = useContext(DataContext);
+    const { userData } = useContext(UserContext);
+
+    const scrollBy = (userData.windowWidth) * 24 / 100;
 
     const getMovieSpecs = (movieID) => {
         return (contentData.moviesData.filter(({ id }) => (id === movieID)))[0];
@@ -35,22 +41,26 @@ export default function Theater({ id, name, movies }) {
     return (
         <div className="theater" >
             <h3>{name}</h3>
-            <div className="theater__movies__container">
-                {moviesToDisplay.length > 0 && moviesToDisplay.map(
-                    (movie, i) =>
-                    (<MovieInTheater
-                        key={nanoid()}
-                        name={movie.name}
-                        picture={movie.picture}
-                        description={movie.description}
-                        slots={movie.slots}
-                        id={id}
-                        movieID={movie.id}
-                    />)
-                )
-                }
-            </div>
+            <div className="container__box">
+                <ScrollLeft scrollBy={scrollBy} />
+                <div className="theater__movies__container">
 
+                    {moviesToDisplay.length > 0 && moviesToDisplay.map(
+                        (movie, i) =>
+                        (<MovieInTheater
+                            key={nanoid()}
+                            name={movie.name}
+                            picture={movie.picture}
+                            description={movie.description}
+                            slots={movie.slots}
+                            id={id}
+                            movieID={movie.id}
+                        />)
+                    )
+                    }
+                </div>
+                <ScrollRight scrollBy={scrollBy} />
+            </div>
         </div>
     )
 }

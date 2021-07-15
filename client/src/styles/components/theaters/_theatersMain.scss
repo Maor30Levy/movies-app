@@ -23,6 +23,7 @@
 .pick-location{
     margin-top: 1rem;
     display: flex;
+    
     width:70vw;
     justify-content: space-evenly;
     height: 2rem;
@@ -34,6 +35,8 @@
         overflow-y: auto;
     }
 }
+
+
 
 @media only screen and (max-width: 820px) {
     .theaters__main{
@@ -51,3 +54,18 @@
     }
 }
 
+
+
+@media only screen and (max-width: 460px) {
+
+    .pick-location{
+        height: unset;
+       flex-direction: column;
+        select{
+            width:100%;
+        }
+        button{
+            width:100%;
+        }
+    }
+}

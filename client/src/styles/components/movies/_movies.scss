@@ -1,15 +1,16 @@
 .movies__container{
     @extend %page;
-    background-color: $myBlue;
     align-items: flex-start;
     flex-direction: column;
     overflow-y: auto;
     width:100vw;
+    max-width:100vw;
     
 }
 
 .container__box{
     display: flex;
+    align-items: center;
 }
 
 .scroll-button{

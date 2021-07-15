@@ -93,7 +93,7 @@ export default function Header() {
                 </div>}
             </div>
             {userData.loggedIn && <div className="logout" onClick={onClickLogout}>Logout</div>}
-            {onInput && <ItemSearch itemInput={itemInput} />}
+            {onInput && <ItemSearch itemInput={itemInput} setOnInput={setOnInput} setIsQuery={setIsQuery} />}
             {!isLoaded && <LoaderContainer />}
         </div>
     )

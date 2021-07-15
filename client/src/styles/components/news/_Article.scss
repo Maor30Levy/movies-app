@@ -1,6 +1,8 @@
 .article__main{
     @extend %page;
     flex-direction: column;
+    overflow-x: hidden;
+    overflow-y:auto;
     *{
        padding: 0.5rem;
 
