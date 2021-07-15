@@ -29,7 +29,7 @@ export default function Row({ seats, row, slotIndex, day, movieID, theaterID, se
             modalDataDispatch(clearModalAction());
             modalDataDispatch(goForwardAction({
                 elementName: "Reservation",
-                props: { orderDetails }
+                props: { orderDetails, row, seat }
             }));
         } catch (err) {
             setErrorMessage(err.response?.data.message || err.message)

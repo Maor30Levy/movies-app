@@ -42,12 +42,21 @@ export const deleteAdmins = async (adminsIDsArray, token) => {
 
 
 export const addMovie = async (movie, token) => {
-    const { data } = await axios.post(`${serverURL}/data/add-movie/`, { movie, token });
-    return data.id;
+    try {
+        const { data } = await axios.post(`${serverURL}/data/add-movie/`, { movie, token });
+        return data.id;
+    } catch (err) {
+        throw err
+    }
+
 };
 
-export const updateMovie = (movieID, fieldsToUpdate) => {
-    console.log(movieID, fieldsToUpdate);
+export const updateMovie = async (token, movieID, movieDetails) => {
+    try {
+        await axios.patch(`${serverURL}/data/update-movie/`, { token, movieID, movieDetails });
+    } catch (err) {
+        throw err
+    }
 };
 
 export const deleteMovies = async (movies, token) => {
