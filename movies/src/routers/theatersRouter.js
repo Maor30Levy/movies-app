@@ -28,12 +28,49 @@ router.post('/theaters/add-location', auth, async (req, res) => {
     }
 });
 
+router.post('/theaters/delete-location', auth, async (req, res) => {
+    try {
+        const { location } = req.body;
+
+        await Location.findOneAndDelete({ name: location });
+        const theaters = await Theater.find({ location });
+        theaters.forEach(async (theater) => {
+            await TimeSlot.deleteMany({ theater: theater.id })
+            await theater.remove();
+        });
+
+        console.log("Locations Deleted");
+
+        return res.send();
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({ message: err.message })
+    }
+});
 
 router.post('/theaters/add-theater', auth, async (req, res) => {
     try {
         const theater = new Theater(req.body.theater);
         await theater.save();
         console.log("Location " + theater.name + " added")
+        return res.send();
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({ message: err.message })
+    }
+});
+
+router.post('/theaters/delete-theaters', auth, async (req, res) => {
+    try {
+        const { theaters } = req.body;
+        console.log(theaters)
+        theaters.forEach(async (theater) => {
+            await Theater.findOneAndDelete({ _id: theater });
+            await TimeSlot.deleteMany({ theater: theater });
+        });
+
+        console.log("Theaters Deleted");
+
         return res.send();
     } catch (err) {
         console.log(err)

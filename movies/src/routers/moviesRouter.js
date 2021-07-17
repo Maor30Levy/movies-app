@@ -86,9 +86,7 @@ router.patch('/movies/add-comment', auth, async (req, res) => {
         const { id } = req.body;
         const movie = await Movie.findOne({ _id: id });
         if (rating) {
-            console.log(rating / 5);
             const ScoreSum = ((movie.ratings.audience) * movie.ratings.numOfRatings) + (rating / 5);
-            console.log("ScoreSum:" + ScoreSum);
             movie.ratings.numOfRatings = movie.ratings.numOfRatings + 1;
             const newRating = ScoreSum / (movie.ratings.numOfRatings);
             movie.ratings.audience = newRating;
@@ -96,6 +94,20 @@ router.patch('/movies/add-comment', auth, async (req, res) => {
         }
         if (comment) movie.comments = [].concat(movie.comments, comment);
         console.log("Comment added")
+        await movie.save();
+        return res.send();
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({ message: err.message })
+    }
+});
+
+router.patch('/movies/update-movie', auth, async (req, res) => {
+    try {
+        const { movieID, movieDetails } = req.body;
+        const movie = await Movie.findOne({ _id: movieID });
+        const updates = Object.keys(movieDetails);
+        updates.forEach((update) => movie[update] = movieDetails[update]);
         await movie.save();
         return res.send();
     } catch (err) {

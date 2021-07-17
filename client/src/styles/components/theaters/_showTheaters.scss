@@ -25,7 +25,8 @@
     height: 30vh;
     display: flex;
     flex-direction: column;
-    max-width: 22vw;
+    max-width: 25vh;
+    width: 25vh;
     box-shadow:  inset 2px 2px 5px 5px  rgb(218, 215, 215);
     border-radius: 0.5rem;
     transition: all .2s ease-in-out;
@@ -48,8 +49,10 @@
 }
     .poster__container{
         z-index: 4;
-        margin: 0 2rem;
-        max-height:20vh;
+        margin: 0;
+        max-height:calc(30vh - 2.5rem);
+        display: flex;
+        justify-content: center;
         .poster{
             margin:0 1rem;
             height: 100%;

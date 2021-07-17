@@ -157,8 +157,12 @@ export const addNewTheater = async (token, theater) => {
     }
 };
 
-export const deleteTheaters = (theaters) => {
-    console.log(theaters);
+export const deleteTheaters = async (token, theaters) => {
+    try {
+        await axios.post(`${serverURL}/data/delete-theaters`, { token, theaters });
+    } catch (err) {
+        throw err
+    }
 };
 
 export const getTheaterByID = (theaterID, theaters) => {
@@ -207,7 +211,7 @@ export const getAllTheaterTimeSlots = (theaterID, movies, availabilityData) => {
     const filterdData = availabilityData.filter(({ theater }) => (theater === theaterID))
     movies.forEach((movie) => {
         const slots = filterdData.filter(({ owner }) => (owner === movie))[0]?.slots;
-        if (slots) result.push({ movieID: movie, slots })
+        result.push({ movieID: movie, slots: slots ? slots : [] });
     })
     return result || [];
 };
@@ -225,11 +229,14 @@ export const addNewLocation = async (token, name) => {
     }
 };
 
-export const deleteLocation = (location, theaters) => {
-    console.log(location);
-    const locationTheaters = getTheatersByLocation({ location, theaters }).map(({ id }) => (id)) || [];
-    console.log(locationTheaters);
+export const deleteLocation = async (token, location) => {
+    try {
+        await axios.post(`${serverURL}/data/delete-location`, { token, location });
+    } catch (err) {
+        throw err
+    }
 };
+
 
 export const checkForExistingLocation = (location, locations) => {
     return locations.filter((l) => (

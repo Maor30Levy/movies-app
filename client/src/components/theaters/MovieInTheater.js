@@ -36,11 +36,11 @@ export default function MovieInTheater({ name, slots, id, picture, description, 
             <div className="poster__container">
                 <img className="poster" src={picture || "./movies-images/movies-icon.png"} alt="movie-poster" />
             </div>
-            {slots.length > 0 &&
+            {/* {slots.length > 0 &&
                 <div className="time-slot">
                     {getSlots(slots)}
                 </div>
-            }
+            } */}
 
         </div>
     )

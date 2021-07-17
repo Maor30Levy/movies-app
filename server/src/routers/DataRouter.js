@@ -265,6 +265,27 @@ router.patch('/data/add-comment', async (req, res) => {
     }
 });
 
+router.patch('/data/update-movie', async (req, res) => {
+    try {
+        const { movieID, movieDetails } = req.body;
+        await axios.patch(`${moviesURL}/movies/update-movie`, { movieID, movieDetails }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
 router.patch('/data/add-seat', async (req, res) => {
     try {
         const { orderDetails } = req.body;
@@ -310,6 +331,27 @@ router.post('/data/add-location', async (req, res) => {
     }
 });
 
+router.post('/data/delete-location', async (req, res) => {
+    try {
+        const { location } = req.body;
+        await axios.post(`${moviesURL}/theaters/delete-location`, { location }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
 router.get('/data/get-locations', async (req, res) => {
     try {
         const { data } = await axios.get(`${moviesURL}/theaters/get-locations`);
@@ -329,6 +371,27 @@ router.get('/data/get-locations', async (req, res) => {
 router.post('/data/add-theater', async (req, res) => {
     try {
         await axios.post(`${moviesURL}/theaters/add-theater`, { theater: req.body.theater }, {
+            headers: {
+                'Authorization': `Bearer ${req.body.token}`,
+                'UserType': "Admin"
+            }
+        });
+        return res.send();
+
+    } catch (err) {
+        if (err.response?.statusText) {
+            console.log(err.response.data.message);
+            return res.status(err.response.status).send({ message: err.response.data.message });
+        }
+        console.log(err.message)
+        return res.status(500).send();
+    }
+});
+
+router.post('/data/delete-theaters', async (req, res) => {
+    try {
+        const { theaters } = req.body;
+        await axios.post(`${moviesURL}/theaters/delete-theaters`, { theaters }, {
             headers: {
                 'Authorization': `Bearer ${req.body.token}`,
                 'UserType': "Admin"

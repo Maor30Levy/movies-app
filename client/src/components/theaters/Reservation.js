@@ -22,15 +22,15 @@ export default function Reservation({ orderDetails, row, seat }) {
     const index = slots.findIndex(indexOfDay);
     const { startTime } = slots[index][day][hourIndex] || "";
     return (
-        <div>
-            Order Details:
-            <div>Movie: {name}</div>
-            <div>Location: {theater.name},{theater.location}</div>
-            <div>Time: {week[day - 1]}, at {startTime}</div>
-            <div>Row: {row} , Seat:{seat}</div>
-            <div>Reservetion ID: {nanoid()}</div>
+        <div className="reservation">
+            <h1>Order Details:</h1>
+            <div><h3>Movie:</h3> {name}</div>
+            <div><h3>Location:</h3> {theater.name}, {theater.location}</div>
+            <div><h3>Time:</h3> {week[day - 1]}, at {startTime}</div>
+            <div><h3>Seat: </h3>Row: {row} , Seat:{seat}</div>
+            <div><h3>Reservetion ID:</h3> {nanoid()}</div>
 
-            <div>Enjoy!</div>
+            <h4>Enjoy !</h4>
 
         </div>
     )
