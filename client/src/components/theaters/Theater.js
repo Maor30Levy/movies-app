@@ -26,10 +26,11 @@ export default function Theater({ id, name, movies }) {
             const movie = { id: movieID };
             const movieSpecs = getMovieSpecs(movieID);
             if (movieSpecs) {
-                const { name, picture, description } = movieSpecs; //ratings
+                const { name, picture, description, trailer } = movieSpecs; //ratings
                 movie.name = name;
                 movie.picture = picture;
                 movie.description = description;
+                movie.trailer = trailer;
                 movie.slots = getMovieAvailability(movieID, id, contentData.availabilityData)
                 result.push(movie);
             }
@@ -52,6 +53,7 @@ export default function Theater({ id, name, movies }) {
                             name={movie.name}
                             picture={movie.picture}
                             description={movie.description}
+                            trailer={movie.trailer}
                             slots={movie.slots}
                             id={id}
                             movieID={movie.id}

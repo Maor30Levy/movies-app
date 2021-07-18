@@ -3,19 +3,8 @@ import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
 
 
-export default function MovieInTheater({ name, slots, id, picture, description, movieID }) {
+export default function MovieInTheater({ name, slots, id, picture, trailer, description, movieID }) {
     const { modalDataDispatch } = useContext(ModalContext);
-
-
-    const getSlots = (slots) => {
-        let result = 'Days: ';
-        for (let slot of slots[0]) {
-            const key = Object.keys(slot);
-            result += `${key[0]}, `;
-        }
-        result.substring(0, result.length - 2)
-        return result.substring(0, result.length - 2);
-    };
 
     const onClickMovie = () => {
         const children = {
@@ -25,6 +14,7 @@ export default function MovieInTheater({ name, slots, id, picture, description, 
                 slots,
                 description,
                 movieID,
+                trailer,
                 theaterID: id
             }
         }

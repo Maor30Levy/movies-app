@@ -3,8 +3,8 @@ import TimeSlot from './TimeSlot';
 import { nanoid } from 'nanoid';
 import { goForwardAction } from '../../actions/ModalActions';
 import { ModalContext } from '../../contexts/ModalContext';
-
-export default function ShowMovieDetails({ name, slots, description, movieID, theaterID }) {
+import Trailer from '../movies/Trailer';
+export default function ShowMovieDetails({ name, slots, description, movieID, theaterID, trailer }) {
 
     const { modalDataDispatch } = useContext(ModalContext);
     const onClickShowHours = (event, slot) => {
@@ -14,6 +14,7 @@ export default function ShowMovieDetails({ name, slots, description, movieID, th
     };
     return (
         <div>
+            {trailer && <Trailer trailer={trailer} />}
             <div className="description__container">
                 {description}
             </div>

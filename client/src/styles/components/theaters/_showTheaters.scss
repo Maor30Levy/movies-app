@@ -82,18 +82,25 @@
  
     overflow-x: auto;
 }
+
     .theater__movie{
         margin-top: 0;
         max-width: 33vw;
         padding: 0.75rem;
+        margin: 0 0.25rem;
+    h4{
+        display: none;
     }
 
-    .theater__movie .poster__container{
+    .poster__container{
         margin: 0;
+        max-height: unset;
         .poster{
             margin: 0;
+            max-height: unset;
         }
     }
+}
 }
 
 @media only screen and (max-height: 460px) {
@@ -106,13 +113,13 @@
     
     .theater__movies__container{
         height:40vh;
-    }
+        
+    
     .theater__movie{
         height:40vh;
+        
     }
 
-    .theater__movie .poster__container{
-        margin: 0 auto;
     }
 }
 
@@ -124,6 +131,13 @@
         height: 30vh;
         width: 40vw;
         max-width: 100%;
+        .poster__container{
+        max-width: unset;
+        .poster{
+            margin: 0;
+            max-height: unset;
+        }
+    }
         h4{
             margin: 0 0.5rem;
         }

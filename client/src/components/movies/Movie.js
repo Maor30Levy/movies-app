@@ -5,8 +5,8 @@ import { getMovieAvailabilityAll } from '../../server/utils';
 import ShowComments from './ShowComments';
 import { nanoid } from 'nanoid';
 import { DataContext } from '../../contexts/DataContext';
-
-export default function Movie({ description, comments, id }) {
+import Trailer from './Trailer';
+export default function Movie({ description, comments, id, trailer }) {
     const { modalDataDispatch } = useContext(ModalContext);
     const { contentData } = useContext(DataContext);
 
@@ -22,6 +22,7 @@ export default function Movie({ description, comments, id }) {
     }
     return (
         <div className="movie__container">
+            {trailer && <Trailer trailer={trailer} />}
             <div className="description__container">
                 {description}
             </div>

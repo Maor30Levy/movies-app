@@ -18,7 +18,7 @@ export default function MoviesSection({ section, getMoviesFunc }) {
                 <ScrollLeft scrollBy={scrollBy} />
                 <div className="item__container">
 
-                    {displayMovies.length > 0 ? displayMovies.map(({ id, description, name, ratings, comments, picture }, i) => (
+                    {displayMovies.length > 0 ? displayMovies.map(({ id, trailer, description, name, ratings, comments, picture }, i) => (
 
                         <MovieItem key={nanoid()}
                             id={id}
@@ -27,7 +27,7 @@ export default function MoviesSection({ section, getMoviesFunc }) {
                             ratings={ratings}
                             comments={comments}
                             picture={picture}
-
+                            trailer={trailer}
                         />
                     )) :
                         "No Available Movies "}

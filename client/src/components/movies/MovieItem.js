@@ -5,13 +5,13 @@ import Ratings from './Ratings';
 
 
 
-export default function MovieItem({ id, description, name, ratings, comments, picture }) {
+export default function MovieItem({ id, description, name, ratings, comments, picture, trailer }) {
     const { modalDataDispatch } = useContext(ModalContext);
 
     const onClickMovie = () => {
         modalDataDispatch(goForwardAction({
             elementName: "Movie",
-            props: { description, comments, id }
+            props: { description, comments, id, trailer }
         }));
     };
     return (

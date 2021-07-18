@@ -10,16 +10,17 @@ export default function UpdateMovieStats({ id }) {
     const { contentData, contentDataDispatch } = useContext(DataContext);
     const { userData } = useContext(UserContext);
     const { modalDataDispatch } = useContext(ModalContext);
-    const { name, description, picture } = getMovieByID(id, contentData.moviesData);
+    const { name, description, picture, trailer } = getMovieByID(id, contentData.moviesData);
     const [newDescription, setNewDescription] = useState(description);
     const [newPicture, setNewPicture] = useState(picture);
-    const setInputs = [setNewDescription, setNewPicture];
+    const [newTrailer, setNewTrailer] = useState(trailer);
+    const setInputs = [setNewDescription, setNewTrailer, setNewPicture];
     const [errorMessage, setErrorMessage] = useState("");
 
     const onClickUpdate = async () => {
         setErrorMessage("");
         try {
-            await updateMovie(userData.token, id, { description: newDescription, picture: newPicture });
+            await updateMovie(userData.token, id, { description: newDescription, picture: newPicture, trailer: newTrailer });
             const moviesData = await getData("movies");
             contentDataDispatch(setDataAction({ moviesData }));
             modalDataDispatch(clearModalAction());
@@ -44,7 +45,8 @@ export default function UpdateMovieStats({ id }) {
         <div className="add-article">
             <h3>{name}</h3>
             Description:<textarea value={newDescription} onInput={onInputText} id="0" />
-            Picture:<input value={newPicture} onInput={onInputText} id="1" />
+            Trailer:<input value={newTrailer} onInput={onInputText} id="1" />
+            Picture:<input value={newPicture} onInput={onInputText} id="2" />
             <button
                 disabled={newDescription === ""}
                 onClick={onClickUpdate}
