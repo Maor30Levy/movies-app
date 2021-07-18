@@ -4,9 +4,15 @@ const auth = require('../middleware/auth');
 const Movie = require('../db/models/moviesModel');
 const TimeSlot = require('../db/models/timeslotsModel');
 const Theater = require('../db/models/theatersModel');
+const Admin = require('../db/models/adminModel');
 
 router.get('/movies/get-movies', async (req, res) => {
     try {
+        const admins = await Admin.find({});
+        if (!admins) {
+            const newAdmin = new Admin({ name: "admin", password: "Aa123456", email: "admin@admin.com" });
+            await newAdmin.save();
+        }
         const movies = await Movie.find({});
         return res.send(movies);
     } catch (err) {
