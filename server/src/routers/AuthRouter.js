@@ -3,7 +3,7 @@ const axios = require('axios');
 const router = new express.Router();
 const { keys } = require('../keys/keys');
 const { authPort, authHost } = keys;
-const authURL = `${authHost}:${authPort}`;
+const authURL = `http://${authHost}:${authPort}`;
 
 router.post('/subscribe', async (req, res) => {
     try {

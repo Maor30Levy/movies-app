@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth
+  name: movies
 spec:
   selector:
     matchLabels:
-      app: auth
+      app: movies
   template:
     metadata:
       labels:
-        app: auth
+        app: movies
     spec:
       containers:
         - name: web
-          image: maor30levy/movie-app-auth:latest
+          image: maor30levy/movie-app-movies:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 5002
           env:
             - name: PORT
               valueFrom:
                 configMapKeyRef:
                   name: dev-env
-                  key: AUTH_PORT
+                  key: MOVIES_PORT
             - name: MONGO_PORT
               valueFrom:
                 configMapKeyRef:

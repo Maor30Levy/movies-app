@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: movies-service
 spec:
   type: ClusterIP
   selector:
-    app: auth
+    app: movies
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: 5002
+      targetPort: 5002

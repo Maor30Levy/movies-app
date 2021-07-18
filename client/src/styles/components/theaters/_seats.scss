@@ -68,11 +68,25 @@
 }
 
 .reservation{
+    display: flex;
+    flex-direction: column;
     h3{
         display: inline;
     }
     line-height: 2rem;
+    .ok-reservation{
+        margin: 0.5rem 0;
+        align-self: center;
+        max-width: 10rem;
+    }
+    .qrcode{
+        align-self: center;
+        max-width: 10rem;
+    }
+.ok-reservation~h4{
+        align-self: center;
 
+    }
 }
 
 @media only screen and (max-width: 820px) {

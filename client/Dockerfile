@@ -8,6 +8,7 @@ RUN yarn install
 COPY . .
 RUN yarn build
 
+# CMD ["npm", "run", "serve"]
 
 FROM nginx
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf

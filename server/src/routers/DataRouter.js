@@ -3,8 +3,8 @@ const router = new express.Router();
 const axios = require('axios');
 const { keys } = require('../keys/keys');
 const { usersHost, usersPort, moviesHost, moviesPort } = keys;
-const usersURL = `${usersHost}:${usersPort}`;
-const moviesURL = `${moviesHost}:${moviesPort}`;
+const usersURL = `http://${usersHost}:${usersPort}`;
+const moviesURL = `http://${moviesHost}:${moviesPort}`;
 
 router.get('/data/admin/get-all', async (req, res) => {
     try {

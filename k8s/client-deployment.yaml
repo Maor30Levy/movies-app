@@ -16,3 +16,19 @@ spec:
           image: maor30levy/movie-app-client:latest
           ports:
             - containerPort: 80
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: CLIENT_PORT
+            - name: REACT_APP_SERVER_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: REACT_APP_SERVER_HOST
+            - name: REACT_APP_SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: dev-env
+                  key: REACT_APP_SERVER_PORT
