@@ -5,7 +5,7 @@ const { keys } = require('../keys/keys');
 const { authPort, authHost } = keys;
 const authURL = `http://${authHost}:${authPort}`;
 
-router.post('/subscribe', async (req, res) => {
+router.post('/server/subscribe', async (req, res) => {
     try {
         const { isAdmin, email, password, name } = req.body;
         const path = isAdmin ? "admin" : "user";
@@ -21,7 +21,7 @@ router.post('/subscribe', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/server/login', async (req, res) => {
     try {
 
         const { isAdmin, email, password } = req.body;
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/logout', async (req, res) => {
+router.post('/server/logout', async (req, res) => {
     try {
         const { token, isAdmin } = req.body;
         const path = isAdmin ? "admin" : "user";

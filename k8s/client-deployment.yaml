@@ -15,7 +15,7 @@ spec:
         - name: web
           image: maor30levy/movie-app-client:latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           env:
             - name: PORT
               valueFrom:

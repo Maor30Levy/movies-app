@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: "localhost"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web-service
+              servicePort: 3000
+          - path: /server/
+            backend:
+              serviceName: server-service
+              servicePort: 4000
